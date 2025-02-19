@@ -1,20 +1,41 @@
-{% extends 'base.html.twig' %}
+{% extends 'base.html.twig' %} {% block title %}Certifications{% endblock %} {% block body %}
+<link rel="stylesheet" href="{{ asset('assets/css/certifications.css') }}" type="text/css" />
 
-{% block title %}Hello CertificationController!{% endblock %}
+<div class="container my-3">
+  <div class="row">
+    <h1>Vos Certifications !</h1>
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <div class="separation"></div>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    {% if certifications is empty %}
+    <p>
+      Vous n'avez pas encore de certifications. Continuez à apprendre et validez vos leçons pour en
+      obtenir !
+    </p>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/kevin/Desktop/Knowledge_Learning/src/Controller/CertificationController.php</code></li>
-        <li>Your template at <code>C:/Users/kevin/Desktop/Knowledge_Learning/templates/certification/index.html.twig</code></li>
+    {% else %} 
+    {% for themeData in certifications %}
+
+    <h2 class=" theme  mt-4 mb-2">{{ themeData.theme.nameTheme }}</h2>
+
+    {% for cursusData in themeData.cursusList %}
+    <div class="cursus mx-3 my-2">
+        <h3 >{{ cursusData.cursus.nameCursus }}</h3>
+    </div>
+    <ul class="ul-cursus">
+      {% for lessonData in cursusData.lessonsList %}
+      <li class="li-lesson">
+        <img
+          class="certification-img"
+          src="{{ asset('assets/uploads/images/certification/'~ lessonData.lesson.certificationImage) }}"
+          alt="{{ lessonData.lesson.nameLesson }}"
+        />
+        <p>{{ lessonData.lesson.nameLesson }}</p>
+        <p>Obtenue le : {{lessonData.obtainedAt|date('d/m/Y')}}</p>
+      </li>
+      {% endfor %}
     </ul>
+    {% endfor %} {% endfor %} {% endif %}
+  </div>
 </div>
 {% endblock %}

@@ -1,20 +1,46 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Knowledge-Learning{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<link rel="stylesheet" href="{{ asset('assets/css/home.css') }}" type="text/css" />
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<div class="container my-5">
+    <div class="row">
+        <div class="col-12 text-center">
+            <div class="img mb-4">
+                <img src="{{ asset('assets/images/image_home.png') }}" alt="Image de présentation" class="img-fluid">
+            </div>
+            <h1>Bienvenue sur Knowledge-Learning</h1>
+        </div>
+    </div>
+    
+    <div class="row mt-5">
+        <div class="col-12 col-lg-8">
+            <h2>Présentation</h2>
+            <p>
+                Knowledge-Learning est une plateforme e-learning dédiée à l’apprentissage dans des domaines aussi divers que la musique, la cuisine, l'informatique, et le jardinage. Pensée pour les passionnés et les curieux, elle propose des parcours structurés et enrichissants adaptés à tous les niveaux. Chaque cursus se compose de leçons interactives avec des fiches et des vidéos, permettant aux utilisateurs d’apprendre à leur propre rythme. Les apprenants peuvent valider leurs compétences en obtenant des certifications « Knowledge-Learning » après avoir complété l’ensemble des leçons d'un thème.
+            </p>
+        </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/kevin/Desktop/Knowledge_Learning/src/Controller/HomeController.php</code></li>
-        <li>Your template at <code>C:/Users/kevin/Desktop/Knowledge_Learning/templates/home/index.html.twig</code></li>
-    </ul>
+        <div class="col-12 col-lg-4">
+            
+            <h3>Les points forts</h3>
+            <ul>
+                <li>Choix de cursus couvrant de nombreux centres d’intérêt.</li>
+                <li>Possibilité d’acheter un cursus complet ou des leçons individuelles.</li>
+                <li>Apprentissage en ligne accessible depuis n’importe quel appareil.</li>
+                <li>À chaque leçon validée, un badge est attribué, attestant la maîtrise de cette leçon.</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="row mt-4">
+        <div class="col-12 text-center">
+            <p>Knowledge-Learning, pour apprendre, se perfectionner et valider ses connaissances dans ses passions !</p>
+            <p>N'hésitez pas et lancez-vous !</p>
+        </div>
+    </div>
 </div>
+
 {% endblock %}

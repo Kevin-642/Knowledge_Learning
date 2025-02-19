@@ -1,0 +1,9 @@
+<link rel="stylesheet" href="{{ asset('assets/css/flash.css') }}" type="text/css" />
+
+<div class="container ">
+  {% for type, messages in app.flashes %}
+  <div class="alert alert-{{ type }}">
+    {{ messages | join('. ')}}
+  </div>
+  {% endfor %}
+</div>

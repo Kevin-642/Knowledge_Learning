@@ -1,0 +1,52 @@
+<link rel="stylesheet" href="{{ asset('assets/css/header.css') }}" type="text/css" />
+
+<header>
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary header-container">
+
+        <div class="container-fluid ">
+
+            <div class="header-logo">
+                <a href="{{ path('app_home') }}">
+                    <img src={{ asset("assets/images/logo_knowledge.png") }} alt="Logo Knowledge" class="logo">
+                </a>
+            </div>
+
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse header-nav" id="navbarNav">
+            <ul class="navbar-nav ms-auto liste my-4">
+              {%if not app.user%}
+              <li class="nav-item"><a href="{{ path('app_home') }}" class="nav-link {% if app.request.get('_route') == 'app_home'%}active{% endif%}">Accueil</a></li>  
+              {%endif%}
+              {% if app.user %} 
+
+              {% if 'ROLE_ADMIN' in app.user.roles %}
+              <li class="nav-item">
+                  <a href="{{ path('admin') }}" class="nav-link {% if app.request.get('_route') == 'admin' %}active{% endif %}">Admin</a>
+              </li>
+              {% endif %}
+              <li class="nav-item"><a href="{{ path('app_formation') }}" class="nav-link {% if app.request.get('_route') == 'app_formation'%}active{% endif%}">Formation</a></li>
+              <li class="nav-item"><a href="{{ path('app_cart') }}" class="nav-link {% if app.request.get('_route') == 'app_cart'%}active{% endif%}">Panier</a></li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Profil
+                </a>
+                <div class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="navbarDropdownMenuLink">
+                  <a href="{{path('app_certifications')}}" class="nav-link {% if app.request.get('_route') == 'app_certifications'%}active{% endif%} mb-2">Certifications</a>
+                  <a href="{{ path('app_logout') }}" class="nav-link {% if app.request.get('_route') == 'app_logout'%}active{% endif%} ">Déconnexion</a>
+                </div>
+              </li>
+              {% else %}
+              <li class="nav-item"><a href="{{ path('app_login') }}" class="nav-link {% if app.request.get('_route') == 'app_login'%}active{% endif%}">Connexion</a></li>
+
+              <li class="nav-item"><a href="{{ path('app_register') }}" class="nav-link {% if app.request.get('_route') == 'app_register'%}active{% endif%}">Inscription</a></li>
+              {% endif%}
+            </ul>
+          </div>
+        </div>
+      </nav>
+    
+</header>
