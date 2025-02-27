@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %} {% block title %}Modifier votre mots de passe{% endblock %} {% block
+body %}
+<link rel="stylesheet" href="{{ asset('assets/css/reset.css') }}" type="text/css" />
+
+<div class="container reset my-5">
+  <div class="reset-form">
+    <div class="p-2">
+      <h2>Modifier votre mots de passe</h2>
+
+      {{ form_start(resetForm) }}
+      {{ form_row(resetForm.plainPassword.first, {
+         attr: { class: "form form-control mb-2" }
+      }) }}
+      {{ form_row(resetForm.plainPassword.second, {
+        attr: { class: "form form-control mb-2" }
+     }) }}
+      <button class="btn button">Modifier votre mots de passe</button>
+      {{ form_end(resetForm) }}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

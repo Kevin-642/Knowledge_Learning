@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %} {% block title %}Connexion!{% endblock %} {% block body %}
+<link rel="stylesheet" href="{{ asset('assets/css/login.css') }}" type="text/css" />
+
+<div class="container security-form">
+  <div class="login-form">
+    <form method="post">
+      {% if error %}
+      <div class="alert alert-danger">
+        {{ error.messageKey|trans(error.messageData, 'security') }}
+      </div>
+      {% endif %} {% if app.user %}
+      <div class="mb-3">
+        You are logged in as {{ app.user.userIdentifier }},
+        <a href="{{ path('app_logout') }}">Logout</a>
+      </div>
+      {% endif %}
+
+      <h1 class="h3 mb-3 font-weight-normal">Connexion</h1>
+
+      <div class="container separation-form">
+        <div class="separation"></div>
+      </div>
+
+      <label for="inputEmail">Email</label>
+      <input
+        type="email"
+        value="{{ last_username }}"
+        name="email"
+        id="inputEmail"
+        class="form-control"
+        autocomplete="email"
+        required
+        autofocus
+      />
+      <label for="inputPassword">Mot de passe</label>
+      <input
+        type="password"
+        name="password"
+        id="inputPassword"
+        class="form-control"
+        autocomplete="current-password"
+        required
+      />
+
+      <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
+
+      <button class="btn btn-lg" type="submit">Connexion</button>
+    </form>
+    <div class="mt-2">
+      <a href="/reset-password">Mot de passe oublié</a>
+    </div>
+
+    <p><a href="/register">Pas encore inscrit ?</a></p>
+  </div>
+</div>
+{% endblock %}

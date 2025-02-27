@@ -1,76 +1,40 @@
-{% extends 'base.html.twig' %}
-{% block title %}Les formations{% endblock %}
-{% block body %}
-<link rel="stylesheet" href="{{ asset('assets/css/formationIndex.css') }}" type="text/css" />
+{% extends 'base.html.twig' %} {% block title %}{{ lesson.nameLesson }}{% endblock %} {% block body
+%}
+<link rel="stylesheet" href="{{ asset('assets/css/detailLesson.css') }}" type="text/css" />
 
-<div class="container my-3">
+<div class="container d-flex flex-column align-items-center my-3">
   <div class="row">
-    <h1>Nos Formations</h1>
+    <div class="block">
+      <h1>{{ lesson.nameLesson }}</h1>
 
-    <div class="text-center">
-      <div class="separation"></div>
-    </div>
-    {% for theme in themes %}
+      <div class="d-flex text-center">
+        <div class="separation"></div>
+      </div>
 
-    <h2 class="mt-3">{{ theme.nameTheme }} :</h2>
+      <div class="block-center">
+        <p>{{ lesson.content }}</p>
+        <video src="{{ asset('assets/uploads/videos/' ~ lesson.videoUrl) }}" controls></video>
+      </div>
 
-    {% for cursus in theme.cursuses %}
-    <div class="card my-2">
-      <div class="card-title mt-3">
-        <div class="d-flex justify-content-evenly">
-          <h3>{{ cursus.nameCursus }}</h3>
+      {% if certification %}
+      <div class="mt-2 certification text-center">
+        
+          <h2 class="titre-certif">Certification Obtenue ! </h2>
+        
+        <div class="block-certif">
+          <img class="certification-img" src="{{ asset('assets/uploads/images/certification/'~ lesson.certificationImage) }}" alt="{{lesson.nameLesson}}">
+          <p>  Obtenue le : {{ certification.obtainedAt ? certification.obtainedAt|date('d-m-Y') : 'N/A' }}</p>
         </div>
       </div>
-      <img
-        class="image-cursus"
-        src="{{ asset('assets/uploads/images/' ~ cursus.images) }}"
-        alt="{{ cursus.nameCursus }}"
-      />
-
-      <p class="mt-2">{{ cursus.description }}</p>
-
-      <div class="d-flex flex-row">
-        {% for lesson in cursus.lesson %}
-        <div class="col-md-6">
-          <div class="d-flex flex-column mx-2 p-3 card card-lesson">
-            <h4>{{ lesson.nameLesson }}</h4>
-            <div class="d-flex justify-content-between">
-              <p>{{ lesson.description }}</p>
-              <p>{{ lesson.price }}€</p>
-            </div>
-
-            <div class="button">
-              {% if lesson in purchasedLessons or cursus in purchasedCursus %}
-                <a href="{{ path('app_cursus', { id_lesson: lesson.idLesson }) }}" class="btn">Voir la leçon</a>
-              {% else %}
-                <a href="{{ path('add_cart', { id_lesson: lesson.idLesson }) }}" class="btn">Acheter la leçon</a>
-              {% endif %}
-            </div>
+      {% else %}
+       <form action="{{ path('validate_lesson', {id_lesson: lesson.idLesson})}}" method="post">
+          <div class="button">
+            <button type="submit " class="btn mt-3">Valider la leçon</button>
           </div>
-        </div>
-        {% endfor %}
-      </div>
-      {% if cursus in purchasedCursus %}
-        <div class="d-flex justify-content-evenly text-center mt-2">
-          <p>Vous avez acheté ce cursus.</p>
-        </div>
-      {% elseif cursus in cursusWithAllLessonsPurchased %}
-        <div class="d-flex justify-content-evenly text-center mt-2">
-          <p>Vous avez toutes les leçons de ce cursus.</p>
-        </div>
-      {% elseif cursus in cursusWithSomeLessonsPurchased %}
-        <div class="d-flex justify-content-evenly text-center mt-2">
-          <p>Vous avez acheté au moin une leçons dans ce cours. <b> Vous ne pouvez plus acheter ce cour</b>. <br> Si vous voulez acceder aux autres leçons, <b>veuillez les acheter individuellement.</b></p>
-        </div>
-      {% else%}
-        <div class="d-flex justify-content-evenly text-center mt-2">
-          <p>L'ensemble du cursus coûte {{ cursus.price }}€</p>
-          <a href="{{ path('add_cart', { id_cursus: cursus.idCursus }) }}" class="btn mb-2">Acheter tout le cursus</a>
-        </div>
+       </form>
       {% endif %}
+      
     </div>
-    {% endfor %}
-    {% endfor %}
   </div>
 </div>
 {% endblock %}

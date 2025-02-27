@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier votre mots de passe{% endblock %}
+
+{% block body %}
+<link rel="stylesheet" href="{{ asset('assets/css/request.css') }}" type="text/css" />
+
+    {% for flash_error in app.flashes('reset_password_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+
+    <div class="container request my-5">
+        <div class="request-form">
+            <div class="p-2">
+                <h2 class="mt-2">Email de modification du mots de passe</h2>
+            
+                {{ form_start(requestForm) }}
+                    {{ form_row(requestForm.email,{
+                    label: "Adresse mail: ",
+                    attr: { class: "form form-control mb-2" }} ) }}
+
+                    <div>
+                        <small>
+                            Entrez votre adresse e-mail et nous vous enverrons un lien pour réinitialiser votre mot de passe.
+                        </small>
+                    </div>
+            
+                    <button class=" btn button">Envoyer à l'adresse mail</button>
+                {{ form_end(requestForm) }}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

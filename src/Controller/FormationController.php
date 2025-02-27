@@ -34,7 +34,7 @@ class FormationController extends AbstractController
             }
         }
 
-        //Logique afin d'evité qu'un utilisateur achete un cursus alor qu'il à deja les lessons
+        //Logique afin d'éviter qu'un utilisateur achete un cursus alors qu'il à deja les leçons
             // Vérifie si l'utilisateur possède déjà toutes les leçons d'un cours
             $cursusWithAllLessonsPurchased = [];
             // Vérifie si l'utilisateur possède une leçon dans un cours
@@ -80,7 +80,7 @@ class FormationController extends AbstractController
         //Vérification de l'achat de la lecon par l'utilisateur
         $purchase = $purchaseRepository->findOneBy(['user'=>$user, 'lesson'=>$lesson]);
         if (!$purchase) {
-            //Vérification de l'achat d'une lecon par le bier du cursus
+            //Vérification de l'achat d'une lecon via le cursus
             $cursusPurchase = $purchaseRepository->findBy(['user'=>$user, 'cursus'=>$lesson->getCursus()]);
             if(empty($cursusPurchase)){
                 $this->addFlash('error', 'Vous n\'avez pas acheter cette leçon.');
@@ -113,7 +113,7 @@ class FormationController extends AbstractController
             $em->persist($certification);
             $em->flush();
         }
-        $this->addFlash('success', 'Félicition vous venez de valider une leçon. Vous venez de recevoir une certification!! ');
+        $this->addFlash('success', 'Félicitation vous venez de valider une leçon. Vous venez de recevoir une certification!! ');
         return $this-> redirectToRoute('app_cursus', ['id_lesson' => $id_lesson]);
     }
 }

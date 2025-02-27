@@ -22,10 +22,10 @@ class AppFixtures extends Fixture
         $faker = Factory::create();
 
         $user = new User();
-            $user ->setUsername('Jane Doe')
-                  ->setEmail('janedoe@gmail.com')
+            $user ->setUsername('Directeur KNOWLEDGE')
+                  ->setEmail('knowledge.direction@gmail.com')
                   ->setRoles(['ROLE_ADMIN'])
-                  ->setPassword($this->passwordHasher->hashPassword($user,'admin0123'))
+                  ->setPassword($this->passwordHasher->hashPassword($user,'DirKNOWLEDGE2021'))
                   ->setCreatedAt(new \DateTimeImmutable())
                   ->setUpdatedAt(new \DateTimeImmutable())
                   ->setVerified(true);
