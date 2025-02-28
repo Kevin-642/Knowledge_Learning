@@ -36,7 +36,7 @@ class CursusFixtures extends Fixture
         $guitare-> setNameCursus("Cursus d'initiation à la guitare")
                 -> setPrice(50)
                 -> setTheme($themeMusique)
-                -> setImages('CursusGuitare.jpg')
+                -> setImages(images: 'CursusGuitare.png')
                 -> setDescription('Ce cursus d\'initiation à la guitare permet aux débutants de découvrir les bases de l\'instrument, tout en apprenant à jouer des morceaux simples et à maîtriser les techniques essentielles.')
                 ->setCreatedAt(new DateTimeImmutable())
                 ->setUpdatedAt(new DateTimeImmutable());
@@ -46,7 +46,7 @@ class CursusFixtures extends Fixture
         $piano-> setNameCursus("Cursus d'initiation au piano")
                 -> setPrice(50)
                 -> setTheme($themeMusique)
-                -> setImages('CursusPiano.jpeg')
+                -> setImages('CursusPiano.png')
                 -> setDescription('Ce cursus d\'initiation au piano offre une approche douce et progressive pour apprendre les fondamentaux de l\'instrument, avec des exercices adaptés aux débutants.')
                 ->setCreatedAt(new DateTimeImmutable())
                 ->setUpdatedAt(new DateTimeImmutable());
@@ -54,10 +54,10 @@ class CursusFixtures extends Fixture
 
         //Cursus Informatique
         $web=new Cursus();
-        $web-> setNameCursus("Cursus d\'initiation au developpement web")
+        $web-> setNameCursus("Cursus d'initiation au developpement web")
                 -> setPrice(60)
                 -> setTheme($themeInformatique)
-                -> setImages('CursusDev.jpeg')
+                -> setImages(images: 'CursusDev.png')
                 -> setDescription('Ce cursus d\'initiation au développement web offre une introduction complète aux langages essentiels comme HTML, CSS et JavaScript, permettant aux débutants de créer leurs premières pages web')
                 ->setCreatedAt(new DateTimeImmutable())
                 ->setUpdatedAt(new DateTimeImmutable());
@@ -69,7 +69,7 @@ class CursusFixtures extends Fixture
         $jardinage-> setNameCursus("Cursus d'initiation au jardinage")
                 -> setPrice(30)
                 -> setTheme($themeJardinage)
-                -> setImages('CursusJardinage.jpeg')
+                -> setImages('CursusJardinage.png')
                 -> setDescription('Ce cursus d\'initiation au jardinage permet aux débutants d`apprendre les techniques fondamentales pour cultiver leur jardin, de la préparation du sol à l`entretien des plantes.')
                 ->setCreatedAt(new DateTimeImmutable())
                 ->setUpdatedAt(new DateTimeImmutable());
@@ -80,7 +80,7 @@ class CursusFixtures extends Fixture
         $cuisine-> setNameCursus("Cursus d'initiation à la cuisine")
                 -> setPrice(44)
                 -> setTheme($themeCuisine)
-                -> setImages('CursusCuisine.jpg')
+                -> setImages('CursusCuisine.png')
                 -> setDescription('À travers des ateliers pratiques, ce programme offre une approche ludique et conviviale pour découvrir les secrets de la cuisine maison et développer sa créativité en cuisine.');
         $manager-> persist($cuisine);
         
@@ -89,7 +89,7 @@ class CursusFixtures extends Fixture
         $dressage-> setNameCursus("Cursus d'initiation à la cuisine")
                 -> setPrice(48)
                 -> setTheme($themeCuisine)
-                -> setImages('CursusArtdelaTable.jpg')
+                -> setImages('CursusArtdelaTable.png')
                 -> setDescription('Ce cursus d\'initiation aux arts de la table permet d\'apprendre les règles de l`élégance et du raffinement, de la mise en place à l\'art de servir avec style.');
         $manager-> persist($dressage);
 

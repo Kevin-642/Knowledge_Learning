@@ -38,8 +38,8 @@ class CursusCrudController extends AbstractCrudController
                 ->setFormTypeOptions(['placeholder' => 'Selectionner un theme ']),
 
             ImageField::new('images')
-                ->setUploadDir('public/assets/uploads/images')
-                ->setBasePath('/uploads/images')
+                ->setUploadDir('public/assets/cursus/images')
+                ->setBasePath('/cursus/images')
                 ->setUploadedFileNamePattern('[randomhash].[extension]')
                 ->setFileConstraints([
                     new File([

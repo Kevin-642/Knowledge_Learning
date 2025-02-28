@@ -13,7 +13,7 @@
 
       <div class="block-center">
         <p>{{ lesson.content }}</p>
-        <video src="{{ asset('assets/uploads/videos/' ~ lesson.videoUrl) }}" controls></video>
+        <video src="{{ asset('assets/cursus/videos/' ~ lesson.videoUrl) }}" controls></video>
       </div>
 
       {% if certification %}
@@ -22,7 +22,7 @@
           <h2 class="titre-certif">Certification Obtenue ! </h2>
         
         <div class="block-certif">
-          <img class="certification-img" src="{{ asset('assets/uploads/images/certification/'~ lesson.certificationImage) }}" alt="{{lesson.nameLesson}}">
+          <img class="certification-img" src="{{ asset('assets/cursus/images/certification/'~ lesson.certificationImage) }}" alt="{{lesson.nameLesson}}">
           <p>  Obtenue le : {{ certification.obtainedAt ? certification.obtainedAt|date('d-m-Y') : 'N/A' }}</p>
         </div>
       </div>

@@ -36,8 +36,8 @@ class LessonCrudController extends AbstractCrudController
             TextareaField::new('content'),
             
             ImageField::new('video_url')
-                ->setUploadDir('public/assets/uploads/videos')
-                ->setBasePath('/uploads/videos')
+                ->setUploadDir('public/assets/cursus/videos')
+                ->setBasePath('/cursus/videos')
                 ->setUploadedFileNamePattern('[randomhash].[extension]')
                 ->setFileConstraints([
                     new File([
@@ -58,8 +58,8 @@ class LessonCrudController extends AbstractCrudController
                 ->setFormTypeOptions(['placeholder' => 'Selectionner un cursus ']),
 
             ImageField::new('certificationImage')
-                ->setUploadDir('public/assets/uploads/images/certification')
-                ->setBasePath('/uploads/images/certification')
+                ->setUploadDir('public/assets/cursus/images/certification')
+                ->setBasePath('/cursus/images/certification')
                 ->setUploadedFileNamePattern('[randomhash].[extension]')
                 ->setFileConstraints([
                     new File([

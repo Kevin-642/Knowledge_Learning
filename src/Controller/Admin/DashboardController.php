@@ -26,8 +26,8 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('<img src="assets/images/logo_knowledge.png" class="img-fluid d-block mx-auto" style="max-width:100px; width:100%;"><h3 class="mt-3">Knowledge Learning Admin</h3>')
-            ->setFaviconPath("assets/images/logo_knowledge.png");
+            ->setTitle('<img src="assets/images/Logo.png" class="img-fluid d-block mx-auto" style="max-width:100px; width:100%;"><h3 class="mt-3">Knowledge Learning Admin</h3>')
+            ->setFaviconPath("assets/images/Logo.png");
     }
 
     public function configureMenuItems(): iterable
