@@ -16,7 +16,7 @@
         "doctrine/doctrine-fixtures-bundle": "^4.0",
         "doctrine/doctrine-migrations-bundle": "^3.4.1",
         "doctrine/orm": "^3.3.2",
-        "easycorp/easyadmin-bundle": "v4.24.4",
+        "easycorp/easyadmin-bundle": "v4.24.5",
         "fakerphp/faker": "v1.24.1",
         "nelmio/cors-bundle": "^2.5",
         "phpdocumentor/reflection-docblock": "^5.6.1",
