@@ -43,7 +43,7 @@
         "symfony/runtime": "v7.2.3",
         "symfony/security-bundle": "v7.2.3",
         "symfony/serializer": "v7.2.4",
-        "symfony/stimulus-bundle": "v2.23.0",
+        "symfony/stimulus-bundle": "^2.23",
         "symfony/string": "v7.2.0",
         "symfony/translation": "v7.2.4",
         "symfony/twig-bundle": "v7.2.0",
