@@ -12,11 +12,11 @@
     "license": "UNLICENSED",
     "private": true,
     "scripts": {
-        "dev-server": "encore dev-server",
-        "dev": "encore dev",
-        "watch": "encore dev --watch",
-        "build": "encore production --progress"
-    },
+        "name": "my-package",
+          "build": "babel src -d lib",
+          "test": "jest"
+        }
+      },
     "dependencies": {
         "@hotwired/stimulus": "^3.2.2",
         "@symfony/stimulus-bridge": "^4.0.0"
