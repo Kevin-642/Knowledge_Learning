@@ -24,7 +24,7 @@
   resolved "https://registry.npmjs.org/@babel/compat-data/-/compat-data-7.26.8.tgz"
   integrity sha512-oH5UPLMWR3L2wEFLnFJ1TZXqHufiTKAiLfqw5zkhS4dKXLJ10yVztfil/twG8EDTA4F/tvVNw9nOl4ZMslB8rQ==
 
-"@babel/core@^7.0.0", "@babel/core@^7.0.0-0", "@babel/core@^7.0.0-0 || ^8.0.0-0 <8.0.0", "@babel/core@^7.12.0", "@babel/core@^7.13.0", "@babel/core@^7.17.0", "@babel/core@^7.4.0 || ^8.0.0-0 <8.0.0":
+"@babel/core@^7.0.0", "@babel/core@^7.0.0-0", "@babel/core@^7.0.0-0 || ^8.0.0-0 <8.0.0", "@babel/core@^7.12.0", "@babel/core@^7.13.0", "@babel/core@^7.17.0", "@babel/core@^7.26.10", "@babel/core@^7.4.0 || ^8.0.0-0 <8.0.0":
   version "7.26.10"
   resolved "https://registry.npmjs.org/@babel/core/-/core-7.26.10.tgz"
   integrity sha512-vMqyb7XCDMPvJFFOaT9kxtiRh42GwlZEg1/uIgtZshS5a/8OaduUfCi7kynKgc3Tw/6Uo2D+db9qBttghhmxwQ==
@@ -662,7 +662,7 @@
     "@babel/helper-create-regexp-features-plugin" "^7.25.9"
     "@babel/helper-plugin-utils" "^7.25.9"
 
-"@babel/preset-env@^7.16.0":
+"@babel/preset-env@^7.16.0", "@babel/preset-env@^7.26.9":
   version "7.26.9"
   resolved "https://registry.npmjs.org/@babel/preset-env/-/preset-env-7.26.9.tgz"
   integrity sha512-vX3qPGE8sEKEAZCWk05k3cpTAE3/nOYca++JA+Rd0z2NCNzabmYvEiSShKzm10zdquOIAVXsy2Ei/DTW34KlKQ==
@@ -793,7 +793,7 @@
   resolved "https://registry.npmjs.org/@hotwired/stimulus-webpack-helpers/-/stimulus-webpack-helpers-1.0.1.tgz"
   integrity sha512-wa/zupVG0eWxRYJjC1IiPBdt3Lruv0RqGN+/DTMmUWUyMAEB27KXmVY6a8YpUVTM7QwVuaLNGW4EqDgrS2upXQ==
 
-"@hotwired/stimulus@^3.0", "@hotwired/stimulus@>= 3.0":
+"@hotwired/stimulus@^3.0", "@hotwired/stimulus@^3.2.2", "@hotwired/stimulus@>= 3.0":
   version "3.2.2"
   resolved "https://registry.npmjs.org/@hotwired/stimulus/-/stimulus-3.2.2.tgz"
   integrity sha512-eGeIqNOQpXoPAIP7tC1+1Yc1yl1xnwYqg+3mzqxyrbE5pg5YFBZcA6YoTiByJB6DKAEsiWtl6tjTJS4IYtbB7A==
@@ -857,7 +857,15 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-
+"@nuxt/friendly-errors-webpack-plugin@^2.5.1":
+  version "2.6.0"
+  resolved "https://registry.npmjs.org/@nuxt/friendly-errors-webpack-plugin/-/friendly-errors-webpack-plugin-2.6.0.tgz"
+  integrity sha512-3IZj6MXbzlvUxDncAxgBMLQwGPY/JlNhy2i+AGyOHCAReR5HcBxYjVRBvyaKM9R3s5k4OODYKeHAbrToZH/47w==
+  dependencies:
+    chalk "^2.4.2"
+    consola "^3.2.3"
+    error-stack-parser "^2.1.4"
+    string-width "^4.2.3"
 
 "@sinclair/typebox@^0.27.8":
   version "0.27.8"
@@ -879,6 +887,7 @@
   resolved "https://registry.npmjs.org/@symfony/webpack-encore/-/webpack-encore-5.1.0.tgz"
   integrity sha512-uSaRnssJj+ZHH9UcHRGI8kQzFb5hfCiPtBwP15vuKH5hTPGeJjQouDDo4UaPB3LuSYJXudKFiSDAnj/4d2z4aQ==
   dependencies:
+    "@nuxt/friendly-errors-webpack-plugin" "^2.5.1"
     babel-loader "^9.1.3"
     css-loader "^7.1.0"
     css-minimizer-webpack-plugin "^7.0.0"
@@ -1354,7 +1363,7 @@ core-js-compat@^3.40.0:
   dependencies:
     browserslist "^4.24.4"
 
-core-js@^3.38.0:
+core-js@^3.41.0:
   version "3.41.0"
   resolved "https://registry.npmjs.org/core-js/-/core-js-3.41.0.tgz"
   integrity sha512-SJ4/EHwS36QMJd6h/Rg+GyR4A5xE0FSI3eZ+iBVpfqf1x0eTSg1smWLHrA+2jQThZSh97fmSgFSU8B61nxosxA==
@@ -2395,12 +2404,7 @@ regenerate@^1.4.2:
   resolved "https://registry.npmjs.org/regenerate/-/regenerate-1.4.2.tgz"
   integrity sha512-zrceR/XhGYU/d/opr2EKO7aRHUeiBI8qjtfHqADTwZd6Szfy16la6kqD0MIUs5z5hx6AaKa+PixpPrR289+I0A==
 
-regenerator-runtime@^0.13.9:
-  version "0.13.11"
-  resolved "https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.13.11.tgz"
-  integrity sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==
-
-regenerator-runtime@^0.14.0:
+regenerator-runtime@^0.14.0, regenerator-runtime@^0.14.1:
   version "0.14.1"
   resolved "https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.14.1.tgz"
   integrity sha512-dYnhHh0nJoMfnkZs6GmmhFknAGRrLznOu5nc9ML+EJxGvrx6H7teuevqVqCuPcPK//3eDrrjQhehXVx9cnkGdw==
