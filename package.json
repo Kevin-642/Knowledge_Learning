@@ -5,20 +5,20 @@
         "@symfony/webpack-encore": "^5.1.0",
         "core-js": "^3.41.0",
         "regenerator-runtime": "^0.14.1",
-        "webpack": "^5.74.0",
-        "webpack-cli": "^5.1.0",
+        "webpack": "^5.98.0",
+        "webpack-cli": "^6.0.1",
         "webpack-notifier": "^1.15.0"
     },
     "license": "UNLICENSED",
     "private": true,
     "scripts": {
         "name": "my-package",
-          "build": "babel src -d lib",
-          "test": "jest"
+        "build": "babel src -d lib",
+        "test": "jest"
     },
-
     "dependencies": {
         "@hotwired/stimulus": "^3.2.2",
-        "@symfony/stimulus-bridge": "^4.0.0"
+        "@symfony/stimulus-bridge": "^4.0.0",
+        "yarn": "^1.22.22"
     }
 }
