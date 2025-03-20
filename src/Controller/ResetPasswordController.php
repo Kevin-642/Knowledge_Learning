@@ -143,5 +143,5 @@ public function reset(Request $request, UserPasswordHasherInterface $passwordHas
         // Store the token object in session for retrieval in check-email route.
         $this->setTokenObjectInSession($resetToken);
 
-        return $this->redirectToRoute('app_check_email');
+        return this->redirectToRoute('app_check_email');
             
