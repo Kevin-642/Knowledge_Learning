@@ -94,7 +94,7 @@ class ResetPasswordController extends AbstractController
         } catch (ResetPasswordExceptionInterface $e) {
             $this->addFlash('reset_password_error', sprintf(
                 '%s - %s',
-                $translator->trans(ResetPasswordExceptionInterface::MESSAGE_PROBLEM_VALIDATE, [], 'ResetPasswordBundle'),
+                $translator->trans('reset_password.token_invalid', [], 'ResetPasswordBundle'),
                 $translator->trans($e->getReason(), [], 'ResetPasswordBundle')
             ));
 
@@ -128,29 +128,37 @@ class ResetPasswordController extends AbstractController
     }
 
     /**
-     * Sends the reset password email.
-     */
-    private function processSendingPasswordResetEmail(string $email, MailerInterface $mailer, TranslatorInterface $translator): RedirectResponse
-    {
-        // Génération du token de réinitialisation de mot de passe
-        $resetToken = $this->resetPasswordHelper->generateResetToken( $email);
+ * Sends the reset password email.
+ */
+private function processSendingPasswordResetEmail(string $email, MailerInterface $mailer, TranslatorInterface $translator): RedirectResponse
+{
+    // Récupération de l'utilisateur à partir de l'email
+    $user = $this->entityManager->getRepository(User::class)->findOneByEmail($email);
 
-        // Envoi du mail
-        $email = (new TemplatedEmail())
-            ->from(new Address('knowledge@learning.com', 'L\'équipe Knowledge Learning'))
-            ->to((string) $email)
-            ->subject('Your password reset request')
-            ->htmlTemplate('reset_password/email.html.twig')
-            ->context([
-                'resetToken' => $resetToken,
-            ]);
-
-        $mailer->send($email);
-
-        // Stockage du token dans la session pour une utilisation future
-        $this->setTokenObjectInSession($resetToken);
-
-        // Redirection vers la page de confirmation
-        return $this->redirectToRoute('app_check_email');
+    if (!$user) {
+        // Si l'utilisateur n'existe pas, tu peux générer un token factice ou afficher une erreur
+        throw $this->createNotFoundException('Utilisateur non trouvé.');
     }
+
+    // Génération du token de réinitialisation de mot de passe en passant l'utilisateur
+    $resetToken = $this->resetPasswordHelper->generateResetToken($user);
+
+    // Envoi du mail
+    $email = (new TemplatedEmail())
+        ->from(new Address('knowledge@learning.com', 'L\'équipe Knowledge Learning'))
+        ->to($email)
+        ->subject('Your password reset request')
+        ->htmlTemplate('reset_password/email.html.twig')
+        ->context([
+            'resetToken' => $resetToken,
+        ]);
+
+    $mailer->send($email);
+
+    // Stockage du token dans la session pour une utilisation future
+    $this->setTokenObjectInSession($resetToken);
+
+    // Redirection vers la page de confirmation
+    return $this->redirectToRoute('app_check_email');
+}
 }
