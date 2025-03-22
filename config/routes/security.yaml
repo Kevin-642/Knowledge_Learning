@@ -2,6 +2,9 @@ _security_logout:
     resource: security.route_loader.logout
     type: service
 
-# config/packages/security.yaml
 security:
-  secret: '%env(APP_SECRET)%'
+    firewalls:
+        
+        main:
+            pattern: ^/
+            secret: '%env(APP_SECRET)%'
