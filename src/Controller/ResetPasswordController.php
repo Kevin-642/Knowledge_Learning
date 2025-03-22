@@ -44,8 +44,7 @@ class ResetPasswordController extends AbstractController
             /** @var string $email */
             $email = $form->get('email')->getData();
 
-            return $this->processSendingPasswordResetEmail($email, $mailer, $translator
-);
+            return $this->processSendingPasswordResetEmail($email, $mailer, $translator);
         }
 
         return $this->render('reset_password/request.html.twig', [
@@ -71,77 +70,87 @@ class ResetPasswordController extends AbstractController
     }
 
    /**
- * Validates and process the reset URL that the user clicked in their email.
- */
-#[Route('/reset/{token}', name: 'app_reset_password')]
-public function reset(Request $request, UserPasswordHasherInterface $passwordHasher, TranslatorInterface $translator, ?string $token = null): Response
-{
-    if ($token) {
-        // Nous stockons le token dans la session et le supprimons de l'URL
-        // pour éviter que l'URL ne soit accessible par JavaScript de tierce partie.
-        $this->storeTokenInSession($token);
+     * Validates and process the reset URL that the user clicked in their email.
+     */
+    #[Route('/reset/{token}', name: 'app_reset_password')]
+    public function reset(Request $request, UserPasswordHasherInterface $passwordHasher, TranslatorInterface $translator, ?string $token = null): Response
+    {
+        if ($token) {
+            // Nous stockons le token dans la session et le supprimons de l'URL
+            // pour éviter que l'URL ne soit accessible par JavaScript de tierce partie.
+            $this->storeTokenInSession($token);
 
-        return $this->redirectToRoute('app_reset_password');
+            return $this->redirectToRoute('app_reset_password');
+        }
+
+        $token = $this->getTokenFromSession();
+        if (null === $token) {
+            throw $this->createNotFoundException('No reset password token found in the URL or in the session.');
+        }
+
+        try {
+            /** @var User $user */
+            $user = $this->resetPasswordHelper->validateTokenAndFetchUser($token);
+        } catch (ResetPasswordExceptionInterface $e) {
+            $this->addFlash('reset_password_error', sprintf(
+                '%s - %s',
+                $translator->trans(ResetPasswordExceptionInterface::MESSAGE_PROBLEM_VALIDATE, [], 'ResetPasswordBundle'),
+                $translator->trans($e->getReason(), [], 'ResetPasswordBundle')
+            ));
+
+            return $this->redirectToRoute('app_forgot_password_request');
+        }
+
+        // Le token est valide; permet à l'utilisateur de changer son mot de passe.
+        $form = $this->createForm(ChangePasswordFormType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Un token de réinitialisation de mot de passe doit être utilisé une seule fois, nous le supprimons.
+            $this->resetPasswordHelper->removeResetRequest($token);
+
+            /** @var string $plainPassword */
+            $plainPassword = $form->get('plainPassword')->getData();
+
+            // Nous hashons le mot de passe et l'enregistrons.
+            $user->setPassword($passwordHasher->hashPassword($user, $plainPassword));
+            $this->entityManager->flush();
+
+            // La session est nettoyée après la réinitialisation du mot de passe.
+            $this->cleanSessionAfterReset();
+
+            return $this->redirectToRoute('app_home');
+        }
+
+        return $this->render('reset_password/reset.html.twig', [
+            'resetForm' => $form,
+        ]);
     }
 
-    $token = $this->getTokenFromSession();
-    if (null === $token) {
-        throw $this->createNotFoundException('No reset password token found in the URL or in the session.');
-    }
+    /**
+     * Sends the reset password email.
+     */
+    private function processSendingPasswordResetEmail(string $email, MailerInterface $mailer, TranslatorInterface $translator): RedirectResponse
+    {
+        // Génération du token de réinitialisation de mot de passe
+        $resetToken = $this->resetPasswordHelper->generateResetToken( $email);
 
-    try {
-        /** @var User $user */
-        $user = $this->resetPasswordHelper->validateTokenAndFetchUser($token);
-    } catch (ResetPasswordExceptionInterface $e) {
-        $this->addFlash('reset_password_error', sprintf(
-            '%s - %s',
-            $translator->trans(ResetPasswordExceptionInterface::MESSAGE_PROBLEM_VALIDATE, [], 'ResetPasswordBundle'),
-            $translator->trans($e->getReason(), [], 'ResetPasswordBundle')
-        ));
-
-        return $this->redirectToRoute('app_forgot_password_request');
-    }
-
-    // Le token est valide; permet à l'utilisateur de changer son mot de passe.
-    $form = $this->createForm(ChangePasswordFormType::class);
-    $form->handleRequest($request);
-
-    if ($form->isSubmitted() && $form->isValid()) {
-        // Un token de réinitialisation de mot de passe doit être utilisé une seule fois, nous le supprimons.
-        $this->resetPasswordHelper->removeResetRequest($token);
-
-        /** @var string $plainPassword */
-        $plainPassword = $form->get('plainPassword')->getData();
-
-        // Nous hashons le mot de passe et l'enregistrons.
-        $user->setPassword($passwordHasher->hashPassword($user, $plainPassword));
-        $this->entityManager->flush();
-
-        // La session est nettoyée après la réinitialisation du mot de passe.
-        $this->cleanSessionAfterReset();
-
-        return $this->redirectToRoute('app_home');
-    }
-
-    return $this->render('reset_password/reset.html.twig', [
-        'resetForm' => $form,
-    ]);
-}}
-
+        // Envoi du mail
         $email = (new TemplatedEmail())
-            ->from(new Address('knowledge@learning.com', 'L\'équipe knowledge learning'))
-            ->to((string) $user->getEmail())
+            ->from(new Address('knowledge@learning.com', 'L\'équipe Knowledge Learning'))
+            ->to((string) $email)
             ->subject('Your password reset request')
             ->htmlTemplate('reset_password/email.html.twig')
             ->context([
                 'resetToken' => $resetToken,
-            ])
-        ;
+            ]);
 
         $mailer->send($email);
 
-        // Store the token object in session for retrieval in check-email route.
+        // Stockage du token dans la session pour une utilisation future
         $this->setTokenObjectInSession($resetToken);
 
-        return this->redirectToRoute('app_check_email');
-            
+        // Redirection vers la page de confirmation
+        return $this->redirectToRoute('app_check_email');
+    }
+}
