@@ -12,21 +12,21 @@
     "license": "UNLICENSED",
     "private": true,
     "scripts": {
-            "dev-server": "encore dev-server",
-            "dev": "encore dev",
-            "watch": "encore dev --watch",
-            "build": "encore production",
-            "test": "jest"
-        },
-        "jest": {
-            "testMatch": [
-                "**/tests/**/*.js"
-            ]
-        },
-        
+        "dev-server": "encore dev-server",
+        "dev": "encore dev",
+        "watch": "encore dev --watch",
+        "build": "encore production",
+        "test": "jest"
+    },
+    "jest": {
+        "testMatch": [
+            "**/tests/**/*.js"
+        ]
+    },
     "dependencies": {
         "@hotwired/stimulus": "^3.2.2",
         "@symfony/stimulus-bridge": "^4.0.0",
+        "stimulus": "^3.2.2",
         "yarn": "^1.22.22"
     }
 }
