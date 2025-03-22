@@ -27,31 +27,31 @@ class SecurityAuthenticator extends AbstractLoginFormAuthenticator
     }
 
     public function authenticate(Request $request): Passport
-    {
-        $email = $request->getPayload()->getString('email');
+{
+    $email = $request->get('email');  // Utilisation de get() au lieu de getPayload()
+    $password = $request->get('password');  // Utilisation de get() au lieu de getPayload()
 
-        $request->getSession()->set(SecurityRequestAttributes::LAST_USERNAME, $email);
+    $request->getSession()->set(SecurityRequestAttributes::LAST_USERNAME, $email);
 
-        return new Passport(
-            new UserBadge($email),
-            new PasswordCredentials($request->getPayload()->getString('password')),
-            [
-                new CsrfTokenBadge('authenticate', $request->getPayload()->getString('_csrf_token')),
-                new RememberMeBadge(),
-            ]
-        );
+    return new Passport(
+        new UserBadge($email),
+        new PasswordCredentials($password),
+        [
+            new CsrfTokenBadge('authenticate', $request->get('_csrf_token')),  // CSRF token avec get()
+            new RememberMeBadge(),
+        ]
+    );
+}
+
+public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
+{
+    if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
+        return new RedirectResponse($targetPath);
     }
 
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
-    {
-        if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
-            return new RedirectResponse($targetPath);
-        }
-
-        // For example:
-         return new RedirectResponse($this->urlGenerator->generate('app_home'));
-        // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
-    }
+    // Si aucune redirection n'a été définie, rediriger vers la page d'accueil
+    return new RedirectResponse($this->urlGenerator->generate('app_home'));
+}
 
     protected function getLoginUrl(Request $request): string
     {
