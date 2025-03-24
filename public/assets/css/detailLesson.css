@@ -1,0 +1,60 @@
+.btn {
+    height: 40px;
+    width: 150px;
+    background-color: #00497c !important;
+    border: #00497c 1px solid;
+    color: white;
+    border-radius: 50px;
+    margin: 5px;
+}
+
+.button {
+    display:flex;
+    justify-content: center;
+}
+
+video {
+    width: 100% !important;    
+}
+
+.block {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.block-center {
+    text-align: start;
+}
+
+.separation {
+    height: 2px;
+    background-color: #82b864;
+    margin: 10px auto;
+    width: 50vw;
+}
+
+.certification {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 10px 5px 15px #384050;
+    margin-top: 1rem !important;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.certification-img {
+    border-radius: 50%;
+    width: 120px;
+}
+
+.block-certif {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 1rem;
+}
+
+.titre-certif {
+    font-size: 1.5rem;
+}

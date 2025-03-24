@@ -1,0 +1,29 @@
+.request {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 50%;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.request-form {
+    width: 20vw;
+    border: 1px solid #444;
+    padding: 15px;
+}
+
+.button {
+    background-color: #0074c7;
+    border: #0074c7 solid 1px;
+    border-radius: 5px;
+    color: white;
+    margin-top: 1rem;
+}
+
+.button:hover {
+    background-color: #00497c;
+    border:#00497c solid 1px;
+    border-radius: 5px;
+    color: white;
+}

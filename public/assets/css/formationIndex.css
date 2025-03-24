@@ -1,0 +1,39 @@
+.btn {
+    background-color: #0074c7;
+    color: white;
+    width: 150px;
+}
+
+.btn:hover {
+    background-color: #00497c;
+    color: white;
+}
+
+.button {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.image-cursus {
+    width: 15%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-left: 550px;
+}
+
+h3 {
+    text-decoration: underline;
+}
+
+.card-lesson {
+    background-color: #f1f8fc;
+}
+
+.separation {
+    height: 2px;
+    background-color: #82b864;
+    margin: 10px auto;
+    width: 50vw;
+}

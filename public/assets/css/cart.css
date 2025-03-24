@@ -1,0 +1,55 @@
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+h1 {
+    margin: 0;
+}
+
+.separation {
+    height: 2px;
+    background-color: #82b864;
+    margin: 2rem auto;
+    width: 50vw;
+}
+
+table {
+    margin-bottom: 2rem;
+}
+
+thead {
+    background-color: #f1f8fc;
+}
+
+th {
+    border: 1px solid #384050;
+    padding: 8px 10px;
+}
+
+td {
+    border: 1px solid #384050;
+    padding: 8px 10px;
+}
+
+.button {
+    margin-bottom: 2rem;
+    background-color: #0074c7;
+    border-radius: 5px;
+    text-decoration: none;
+    width: auto;
+}
+
+.btn {
+    color: white !important;
+}
+
+.delete {
+    background-color: red;
+    color: white;
+    border: #cd2c2e 1px solid;
+    border-radius: 5px;
+    padding: 5px;
+}
