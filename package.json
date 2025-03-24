@@ -17,6 +17,7 @@
         "dev": "encore dev",
         "watch": "encore dev --watch",
         "build": "encore production",
+        "postinstall": "npm run build",
         "test": "jest"
     },
     "jest": {
@@ -27,6 +28,9 @@
     "dependencies": {
         "@hotwired/stimulus": "^3.2.2",
         "@symfony/stimulus-bridge": "^4.0.0",
+        "sass": "^1.86.0",
+        "sass-loader": "^16.0.5",
+        "save-dev": "^0.0.1-security",
         "stimulus": "^3.2.2",
         "yarn": "^1.22.22"
     }
