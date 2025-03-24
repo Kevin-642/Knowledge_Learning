@@ -29,33 +29,28 @@ class SecurityAuthenticator extends AbstractLoginFormAuthenticator
 
     public function supports(Request $request): bool
     {
-    dump($request->attributes->get('_route'));  // Affiche la route
-    dump($request->getMethod());  // Affiche la méthode HTTP
-    return $request->attributes->get('_route') === 'app_login' && $request->isMethod('POST');
+      return $request->attributes->get('_route') === 'app_login' && $request->isMethod('POST');
     }
 
     public function authenticate(Request $request): Passport
-    {
-        // Récupère les informations du formulaire
-        $email = $request->get('email');
-        $password = $request->get('password');
+{
+    $email = $request->request->get('email');
+    $password = $request->request->get('password');
 
-        if (!$email || !$password) {
-            throw new AuthenticationException('Les informations d\'identification sont manquantes.');
-        }
-
-        // Enregistre le dernier utilisateur utilisé pour l'auto-remplissage
-        $request->getSession()->set(SecurityRequestAttributes::LAST_USERNAME, $email);
-
-        return new Passport(
-            new UserBadge($email),
-            new PasswordCredentials($password),
-            [
-                new CsrfTokenBadge('authenticate', $request->get('_csrf_token')),
-                new RememberMeBadge(),
-            ]
-        );
+    dump($email, $password); // Vérifie que l'email et le mot de passe sont récupérés
+    if (!$email || !$password) {
+        throw new AuthenticationException('Les informations d\'identification sont manquantes.');
     }
+
+    return new Passport(
+        new UserBadge($email),
+        new PasswordCredentials($password),
+        [
+            new CsrfTokenBadge('authenticate', $request->get('_csrf_token')),
+            new RememberMeBadge(),
+        ]
+    );
+}
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
