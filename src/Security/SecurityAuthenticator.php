@@ -29,15 +29,17 @@ class SecurityAuthenticator extends AbstractLoginFormAuthenticator
 
     public function supports(Request $request): bool
     {
-      return $request->attributes->get('_route') === 'app_login' && $request->isMethod('POST');
+    return $request->attributes->get('_route') === self::LOGIN_ROUTE 
+        && $request->isMethod('POST');
     }
 
     public function authenticate(Request $request): Passport
-{
+    {
     $email = $request->request->get('email');
     $password = $request->request->get('password');
 
-    dump($email, $password); // Vérifie que l'email et le mot de passe sont récupérés
+    dump("Email:", $email, "Password:", $password);
+
     if (!$email || !$password) {
         throw new AuthenticationException('Les informations d\'identification sont manquantes.');
     }
@@ -46,7 +48,7 @@ class SecurityAuthenticator extends AbstractLoginFormAuthenticator
         new UserBadge($email),
         new PasswordCredentials($password),
         [
-            new CsrfTokenBadge('authenticate', $request->get('_csrf_token')),
+            new CsrfTokenBadge('authenticate', $request->request->get('_csrf_token')),
             new RememberMeBadge(),
         ]
     );

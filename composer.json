@@ -97,7 +97,9 @@
             "@auto-scripts"
         ],
         "post-update-cmd": [
-            "@auto-scripts"
+            "@auto-scripts",
+            "npm install",
+            "npm run build"
         ]
     },
     "conflict": {
