@@ -6,8 +6,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Security\Http\Authenticator\AbstractLoginFormAuthenticator;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Http\Authenticator\AbstractLoginFormAuthenticator;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\CsrfTokenBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\RememberMeBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
@@ -15,7 +15,6 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordC
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\SecurityRequestAttributes;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
 class SecurityAuthenticator extends AbstractLoginFormAuthenticator
 {
@@ -27,32 +26,21 @@ class SecurityAuthenticator extends AbstractLoginFormAuthenticator
     {
     }
 
-    public function supports(Request $request): bool
-    {
-    return $request->attributes->get('_route') === self::LOGIN_ROUTE 
-        && $request->isMethod('POST');
-    }
-
     public function authenticate(Request $request): Passport
     {
-    $email = $request->request->get('email');
-    $password = $request->request->get('password');
+        $email = $request->getPayload()->getString('email');
 
-    dump("Email:", $email, "Password:", $password);
+        $request->getSession()->set(SecurityRequestAttributes::LAST_USERNAME, $email);
 
-    if (!$email || !$password) {
-        throw new AuthenticationException('Les informations d\'identification sont manquantes.');
+        return new Passport(
+            new UserBadge($email),
+            new PasswordCredentials($request->getPayload()->getString('password')),
+            [
+                new CsrfTokenBadge('authenticate', $request->getPayload()->getString('_csrf_token')),
+                new RememberMeBadge(),
+            ]
+        );
     }
-
-    return new Passport(
-        new UserBadge($email),
-        new PasswordCredentials($password),
-        [
-            new CsrfTokenBadge('authenticate', $request->request->get('_csrf_token')),
-            new RememberMeBadge(),
-        ]
-    );
-}
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
@@ -60,7 +48,9 @@ class SecurityAuthenticator extends AbstractLoginFormAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-        return new RedirectResponse($this->urlGenerator->generate('app_home'));
+        // For example:
+         return new RedirectResponse($this->urlGenerator->generate('app_home'));
+        // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 
     protected function getLoginUrl(Request $request): string
