@@ -29,8 +29,9 @@ class SecurityAuthenticator extends AbstractLoginFormAuthenticator
 
     public function supports(Request $request): bool
     {
-        // Vérifie que la route est bien celle de la connexion
-        return $request->attributes->get('_route') === self::LOGIN_ROUTE;
+    dump($request->attributes->get('_route'));  // Affiche la route
+    dump($request->getMethod());  // Affiche la méthode HTTP
+    return $request->attributes->get('_route') === 'app_login' && $request->isMethod('POST');
     }
 
     public function authenticate(Request $request): Passport

@@ -24,7 +24,7 @@ Encore
     // public path used by the web server to access the output path
     .setPublicPath('/build')
     // only needed for CDN's or subdirectory deploy
-    //.setManifestKeyPrefix('build/')
+    .setManifestKeyPrefix('build/')
 
     /*
      * ENTRY CONFIG

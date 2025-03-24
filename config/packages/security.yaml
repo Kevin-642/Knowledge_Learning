@@ -1,26 +1,29 @@
 security:
-    # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
-    # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
+
     providers:
-        # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:
             entity:
                 class: App\Entity\User
                 property: email
-    firewalls:
+
+    firewalls:  # 🔥 Cette clé est obligatoire pour déclarer les firewalls !
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+
         main:
+            pattern: ^/  # 🔥 Assure que ce firewall capture toutes les routes
             lazy: true
             provider: app_user_provider
-            custom_authenticator: App\Security\SecurityAuthenticator
+            custom_authenticators:
+                - App\Security\SecurityAuthenticator
+            entry_point: App\Security\SecurityAuthenticator
+
             logout:
                 path: app_logout
-                # where to redirect after logout
-                # target: app_any_route
+                target: app_login  # 🔥 Redirige après déconnexion
 
             remember_me:
                 secret: '%kernel.secret%'
@@ -28,17 +31,14 @@ security:
                 path: /
                 always_remember_me: true
 
-            # activate different ways to authenticate
-            # https://symfony.com/doc/current/security.html#the-firewall
+            form_login:  # 🔥 Ajouté pour permettre la connexion via formulaire
+                login_path: app_login
+                check_path: app_login
+                default_target_path: app_home
 
-            # https://symfony.com/doc/current/security/impersonating_user.html
-            # switch_user: true
-
-    # Easy way to control access for large sections of your site
-    # Note: Only the *first* access control that matches will be used
     access_control:
-         - { path: ^/admin, roles: ROLE_ADMIN }
-         - { path: ^/formation, roles: ROLE_USER }
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/formation, roles: ROLE_USER }
 
 when@test:
     security:
