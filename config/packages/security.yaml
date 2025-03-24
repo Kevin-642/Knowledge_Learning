@@ -16,9 +16,8 @@ security:
 
         main:
             pattern: ^/
+            entry_point: form_login  # Définition claire du entry_point
             provider: app_user_provider
-            custom_authenticators:
-                - App\Security\SecurityAuthenticator
             form_login:
                 login_path: app_login
                 check_path: app_login
@@ -26,7 +25,7 @@ security:
                 password_parameter: password
             remember_me:
                 secret: '%kernel.secret%'
-                lifetime: 604800  # 1 semaine
+                lifetime: 604800 # 1 semaine
                 path: /
             logout:
                 path: app_logout
