@@ -41,6 +41,7 @@
         "symfony/process": "v7.2.4",
         "symfony/property-access": "v7.2.3",
         "symfony/property-info": "v7.2.3",
+        "symfony/requirements-checker": "*",
         "symfony/runtime": "v7.2.3",
         "symfony/security-bundle": "v7.2.3",
         "symfony/serializer": "v7.2.4",
@@ -91,7 +92,8 @@
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd",
-            "importmap:install": "symfony-cmd"
+            "importmap:install": "symfony-cmd",
+            "requirements-checker": "script"
         },
         "post-install-cmd": [
             "@auto-scripts"

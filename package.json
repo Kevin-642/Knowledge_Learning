@@ -28,10 +28,32 @@
     "dependencies": {
         "@hotwired/stimulus": "^3.2.2",
         "@symfony/stimulus-bridge": "^4.0.0",
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0",
+        "react-scripts": "^5.0.1",
         "sass": "^1.86.0",
         "sass-loader": "^16.0.5",
         "save-dev": "^0.0.1-security",
         "stimulus": "^3.2.2",
+        "typescript": "^5.8.2",
         "yarn": "^1.22.22"
-    }
+    },
+    "name": "knowledge_learning",
+    "version": "1.0.0",
+    "description": "Projet de Site E-Learning \r \"Knowledge Learning\"",
+    "main": "webpack.config.js",
+    "directories": {
+        "test": "tests"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Kevin-642/Knowledge_Learning.git"
+    },
+    "keywords": [],
+    "author": "",
+    "type": "commonjs",
+    "bugs": {
+        "url": "https://github.com/Kevin-642/Knowledge_Learning/issues"
+    },
+    "homepage": "https://github.com/Kevin-642/Knowledge_Learning#readme"
 }
