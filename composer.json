@@ -9,55 +9,51 @@
         "php": ">=8.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "api-platform/doctrine-orm": "v4.1.3",
-        "api-platform/symfony": "v4.1.3",
-        "doctrine/dbal": "^4.2.3",
-        "doctrine/doctrine-bundle": "^2.14.0",
-        "doctrine/doctrine-fixtures-bundle": "^4.0",
-        "doctrine/doctrine-migrations-bundle": "^3.4.1",
-        "doctrine/orm": "^3.3.2",
-        "easycorp/easyadmin-bundle": "v4.24.5",
-        "fakerphp/faker": "v1.24.1",
+        "api-platform/doctrine-orm": "^4.0",
+        "api-platform/symfony": "^4.0",
+        "doctrine/dbal": "^3",
+        "doctrine/doctrine-bundle": "^2.13",
+        "doctrine/doctrine-migrations-bundle": "^3.3",
+        "doctrine/orm": "^3.3",
+        "easycorp/easyadmin-bundle": "*",
+        "fakerphp/faker": "^1.23",
         "nelmio/cors-bundle": "^2.5",
-        "phpdocumentor/reflection-docblock": "^5.6.1",
-        "phpstan/phpdoc-parser": "^2.1.0",
-        "stripe/stripe-php": "v16.6.0",
-        "symfony/asset": "v7.2.0",
-        "symfony/asset-mapper": "v7.2.3",
-        "symfony/console": "v7.2.1",
-        "symfony/debug-bundle": "v7.2.0",
-        "symfony/doctrine-messenger": "v7.2.3",
-        "symfony/dotenv": "v7.2.0",
-        "symfony/expression-language": "v7.2.0",
-        "symfony/flex": "v2.5.0",
-        "symfony/form": "v7.2.4",
-        "symfony/framework-bundle": "v7.2.4",
-        "symfony/http-client": "v7.2.4",
-        "symfony/intl": "v7.2.0",
-        "symfony/mailer": "v7.2.3",
-        "symfony/mime": "v7.2.4",
-        "symfony/monolog-bundle": "v3.10.0",
-        "symfony/notifier": "v7.2.0",
-        "symfony/process": "v7.2.4",
-        "symfony/property-access": "v7.2.3",
-        "symfony/property-info": "v7.2.3",
-        "symfony/requirements-checker": "v2.0.3",
-        "symfony/runtime": "v7.2.3",
-        "symfony/security-bundle": "v7.2.3",
-        "symfony/serializer": "v7.2.4",
-        "symfony/stimulus-bundle": "v2.23.0",
-        "symfony/string": "v7.2.0",
-        "symfony/translation": "v7.2.4",
-        "symfony/twig-bundle": "v7.2.0",
-        "symfony/ux-turbo": "v2.23.0",
-        "symfony/validator": "v7.2.4",
-        "symfony/web-link": "v7.2.0",
-        "symfony/webpack-encore-bundle": "v2.2.0",
-        "symfony/yaml": "v7.2.3",
-        "symfonycasts/reset-password-bundle": "v1.23.1",
-        "symfonycasts/verify-email-bundle": "v1.17.3",
-        "twig/extra-bundle": "v3.20.0",
-        "twig/twig": "v3.20.0"
+        "phpdocumentor/reflection-docblock": "^5.4",
+        "phpstan/phpdoc-parser": "^1.33",
+        "stripe/stripe-php": "^16.2",
+        "symfony/asset": "7.1.*",
+        "symfony/asset-mapper": "7.1.*",
+        "symfony/console": "7.1.*",
+        "symfony/doctrine-messenger": "7.1.*",
+        "symfony/dotenv": "7.1.*",
+        "symfony/expression-language": "7.1.*",
+        "symfony/flex": "^2",
+        "symfony/form": "7.1.*",
+        "symfony/framework-bundle": "7.1.*",
+        "symfony/http-client": "7.1.*",
+        "symfony/intl": "7.1.*",
+        "symfony/mailer": "7.1.*",
+        "symfony/mime": "7.1.*",
+        "symfony/monolog-bundle": "^3.0",
+        "symfony/notifier": "7.1.*",
+        "symfony/process": "7.1.*",
+        "symfony/property-access": "7.1.*",
+        "symfony/property-info": "7.1.*",
+        "symfony/runtime": "7.1.*",
+        "symfony/security-bundle": "7.1.*",
+        "symfony/serializer": "7.1.*",
+        "symfony/stimulus-bundle": "^2.21",
+        "symfony/string": "7.1.*",
+        "symfony/translation": "7.1.*",
+        "symfony/twig-bundle": "7.1.*",
+        "symfony/ux-turbo": "^2.21",
+        "symfony/validator": "7.1.*",
+        "symfony/web-link": "7.1.*",
+        "symfony/yaml": "7.1.*",
+        "symfonycasts/reset-password-bundle": "^1.22",
+        "symfonycasts/verify-email-bundle": "^1.17",
+        "twig/extra-bundle": "^2.12|^3.0",
+        "twig/twig": "^2.12|^3.0"
     },
     "config": {
         "allow-plugins": {
@@ -65,7 +61,6 @@
             "symfony/flex": true,
             "symfony/runtime": true
         },
-        "bump-after-update": true,
         "sort-packages": true
     },
     "autoload": {
@@ -80,43 +75,46 @@
     },
     "replace": {
         "symfony/polyfill-ctype": "*",
-        "symfony/polyfill-iconv": "*"
+        "symfony/polyfill-iconv": "*",
+        "symfony/polyfill-php72": "*",
+        "symfony/polyfill-php73": "*",
+        "symfony/polyfill-php74": "*",
+        "symfony/polyfill-php80": "*",
+        "symfony/polyfill-php81": "*",
+        "symfony/polyfill-php82": "*"
     },
     "scripts": {
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd",
-            "importmap:install": "symfony-cmd",
-            "requirements-checker": "script"
+            "importmap:install": "symfony-cmd"
         },
         "post-install-cmd": [
             "@auto-scripts"
         ],
         "post-update-cmd": [
-            "@auto-scripts",
-            "npm install",
-            "npm run build"
+            "@auto-scripts"
         ]
     },
     "conflict": {
         "symfony/symfony": "*"
-   
     },
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "7.2.*"
+            "require": "7.1.*"
         }
     },
     "require-dev": {
-        "dama/doctrine-test-bundle": "v8.3.0",
-        "friendsofphp/php-cs-fixer": "v3.73.1",
-        "phpunit/phpunit": "^12.0.10",
-        "symfony/browser-kit": "v7.2.4",
-        "symfony/css-selector": "v7.2.0",
-        "symfony/maker-bundle": "v1.62.1",
-        "symfony/phpunit-bridge": "v7.2.0",
-        "symfony/stopwatch": "v7.2.4",
-        "symfony/web-profiler-bundle": "v7.2.4"
+        "dama/doctrine-test-bundle": "^8.2",
+        "doctrine/doctrine-fixtures-bundle": "^3.6",
+        "phpunit/phpunit": "^9.5",
+        "symfony/browser-kit": "7.1.*",
+        "symfony/css-selector": "7.1.*",
+        "symfony/debug-bundle": "7.1.*",
+        "symfony/maker-bundle": "^1.0",
+        "symfony/phpunit-bridge": "^7.1",
+        "symfony/stopwatch": "7.1.*",
+        "symfony/web-profiler-bundle": "7.1.*"
     }
 }
