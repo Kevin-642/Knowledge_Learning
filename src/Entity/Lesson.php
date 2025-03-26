@@ -35,7 +35,7 @@ class Lesson
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    #[ORM\ManyToOne(inversedBy: 'Lesson')]
+    #[ORM\ManyToOne(inversedBy: 'lesson')]
     #[ORM\JoinColumn(name: "id_cursus", referencedColumnName: "id_cursus")]
     private ?Cursus $cursus = null;
 
