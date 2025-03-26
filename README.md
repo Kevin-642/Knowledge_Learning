@@ -38,3 +38,6 @@ Message d'erreur lorsque vous êtes dans la partie admin et que vous voulez alle
  - 'php bin/console doctrine:fixtures:load --env=test'.
  
  - Et enfin pour lancer les tests 'php bin/phpunit'.
+
+
+Le projet est disponible à l'adresse suivante : https://knowledge2.osc-fr1.scalingo.io/
