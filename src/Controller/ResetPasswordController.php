@@ -160,5 +160,4 @@ private function processSendingPasswordResetEmail(string $email, MailerInterface
 
     // Redirection vers la page de confirmation
     return $this->redirectToRoute('app_check_email');
-}
-}
+}}
