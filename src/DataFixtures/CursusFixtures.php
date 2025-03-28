@@ -243,7 +243,6 @@ class CursusFixtures extends Fixture
                         -> setDescription('Ce cours aux arts de la table offre une initiation complète aux techniques de mise en scène d’un repas élégant et raffiné. Les participants apprendront les règles de la décoration de table, la sélection des accessoires et l’organisation d’un service soigné, tout en découvrant l\'art de créer une ambiance harmonieuse pour recevoir. Grâce à des conseils pratiques et créatifs, ce cours permet de maîtriser l\'art de recevoir et de transformer chaque repas en un moment inoubliable.');
         $manager->persist($lesson2dressage);
 
-
         $manager->flush();
      }
 }
