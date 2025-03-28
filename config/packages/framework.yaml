@@ -13,7 +13,6 @@ framework:
         gc_maxlifetime: 1440
         save_path: '%kernel.project_dir%/var/sessions/%kernel.environment%'
         metadata_update_threshold: 0
-        sid_length: 22
         sid_bits_per_character: 4
 
     #esi: true
