@@ -1,9 +1,10 @@
 doctrine:
     dbal:
         driver: pdo_mysql
-        host: '%env(DATABASE_URL)%'
-        dbname: 'knowledge2'
+        host: 'knowledge2-6781.mysql.b.osc-fr1.scalingo-dbs.com'
+        dbname: 'knowledge2_6781'
         user: 'knowledge2_6781'
+        password: '3qTDzaFh9IIFDjgu8Z_j0PbKAeHrg911cR2DmXFRuw4jDuIts6slApF9HhNtjvRB'
         charset: UTF8
 
         # IMPORTANT: You MUST configure your server version,
