@@ -4,7 +4,6 @@ doctrine:
         host: '%env(DATABASE_URL)%'
         dbname: 'knowledge2'
         user: 'knowledge2_6781'
-        password: '%env(DATABASE_PASSWORD)%'
         charset: UTF8
 
         # IMPORTANT: You MUST configure your server version,
