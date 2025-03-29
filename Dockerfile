@@ -1,28 +1,30 @@
-# Choisir l'image PHP officielle
-FROM php:8.1-cli
+# Utiliser l'image PHP 8.2
+FROM php:8.2-fpm
 
-# Installer les dépendances nécessaires pour Symfony
+# Installer les dépendances
 RUN apt-get update && apt-get install -y \
-    git \
-    unzip \
     libpng-dev \
-    libjpeg62-turbo-dev \
+    libjpeg-dev \
     libfreetype6-dev \
-    libicu-dev \
-    zlib1g-dev \
-    libzip-dev \
+    libxml2-dev \
+    zip \
+    git \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install gd intl zip opcache \
-    && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+    && docker-php-ext-install gd pdo pdo_mysql xml opcache \
+    && rm -r /var/lib/apt/lists/*
 
-# Copier les fichiers de ton projet dans le conteneur
-COPY . /app
+# Copier le code de l'application dans le container
+COPY . /var/www/symfony
 
 # Définir le répertoire de travail
-WORKDIR /app
+WORKDIR /var/www/symfony
 
-# Installer les dépendances PHP avec Composer
+# Installer les dépendances avec Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN composer install --no-dev --optimize-autoloader
 
-# Commande pour démarrer le serveur Symfony (ou un serveur web comme Nginx si tu préfères)
-CMD ["php", "bin/console", "server:run", "0.0.0.0:10000"]
+# Exposer le port 9000 (ou 80 si vous avez un serveur web)
+EXPOSE 9000
+
+# Démarrer PHP-FPM
+CMD ["php-fpm"]
