@@ -19,12 +19,20 @@ COPY . /var/www/symfony
 # Définir le répertoire de travail
 WORKDIR /var/www/symfony
 
-# Installer les dépendances avec Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-RUN composer install --no-dev --optimize-autoloader
+# Étape pour installer Composer
+RUN curl -sS https://getcomposer.org/installer | php --install-dir=/usr/local/bin --filename=composer
 
-# Exposer le port 9000 (ou 80 si vous avez un serveur web)
+# Étape pour installer Symfony CLI
+RUN curl -sS https://get.symfony.com/cli/installer | bash
+RUN mv /root/.symfony*/bin/symfony /usr/local/bin/symfony
+
+# Installation des dépendances
+RUN composer install --no-dev --optimize-autoloader --no-scripts
+
+
+# Exposer le port (ajuste selon ton besoin)
 EXPOSE 9000
+
 
 # Démarrer PHP-FPM
 CMD ["php-fpm"]
