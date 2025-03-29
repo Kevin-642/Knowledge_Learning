@@ -1,18 +1,8 @@
 doctrine:
     dbal:
-        driver: pdo_mysql
-        host: 'knowledge2-6781.mysql.b.osc-fr1.scalingo-dbs.com'
-        dbname: 'knowledge2_6781'
-        user: 'knowledge2_6781'
-        password: '3qTDzaFh9IIFDjgu8Z_j0PbKAeHrg911cR2DmXFRuw4jDuIts6slApF9HhNtjvRB'
+        url: '%env(DATABASE_URL)%'  # Utilise la variable d'environnement DATABASE_URL
         charset: UTF8
 
-        # IMPORTANT: You MUST configure your server version,
-        # either here or in the DATABASE_URL env var (see .env file)
-        #server_version: '16'
-
-        profiling_collect_backtrace: '%kernel.debug%'
-        use_savepoints: true
     orm:
         auto_generate_proxy_classes: true
         enable_lazy_ghost_objects: true
