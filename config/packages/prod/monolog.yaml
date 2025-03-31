@@ -1,0 +1,7 @@
+monolog:
+    channels: [doctrine]
+    handlers:
+        main:
+            type: stream
+            level: debug
+            path: "%kernel.logs_dir%/doctrine.log"
