@@ -1,3 +1,7 @@
 # config/packages/debug.yaml
-debug:
-    dump_destination: "tcp://%env(VAR_DUMPER_SERVER)%"
+
+when@dev:
+    debug:
+        dump_destination: "tcp://%env(VAR_DUMPER_SERVER)%"
+
+# En production, cela ne devrait pas être activé.
