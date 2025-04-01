@@ -1,4 +1,4 @@
-
+/README.md
 ###> symfony/framework-bundle ###
 /.env.local.php
 /.env.*.local

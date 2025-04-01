@@ -51,3 +51,7 @@ when@prod:
                     adapter: cache.app
                 doctrine.system_cache_pool:
                     adapter: cache.system
+
+options:
+!php/const PDO::MYSQL_ATTR_SSL_CA: '/usr/share/ca-certificates/Scalingo/scalingo-database.pem'
+!php/const PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT: true
