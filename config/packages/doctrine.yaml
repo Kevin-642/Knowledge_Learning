@@ -1,12 +1,11 @@
 doctrine:
     dbal:
-        driver: 'pdo_mysql'
-        host: '%env(DATABASE_HOST)%'          # Récupère l'hôte de la base de données
-        port: '%env(DATABASE_PORT)%'          # Récupère le port de la base de données
-        dbname: '%env(DATABASE_NAME)%'        # Récupère le nom de la base de données
-        user: '%env(DATABASE_USER)%'          # Récupère l'utilisateur de la base de données
-        password: '%env(DATABASE_PASSWORD)%'  # Récupère le mot de passe de la base de données
+        url: '%env(SCALINGO_MYSQL_URL)%'
         charset: UTF8
+        options:
+            !php/const PDO::MYSQL_ATTR_SSL_CA: '%kernel.project_dir%/config/certs/scalingo-database.pem'
+            !php/const PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT: true
+
 
     orm:
         auto_generate_proxy_classes: true
@@ -51,7 +50,3 @@ when@prod:
                     adapter: cache.app
                 doctrine.system_cache_pool:
                     adapter: cache.system
-
-options:
-!php/const PDO::MYSQL_ATTR_SSL_CA: '/usr/share/ca-certificates/Scalingo/scalingo-database.pem'
-!php/const PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT: true
