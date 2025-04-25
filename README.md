@@ -40,4 +40,4 @@ Message d'erreur lorsque vous êtes dans la partie admin et que vous voulez alle
  - Et enfin pour lancer les tests 'php bin/phpunit'.
 
 
-Le projet est disponible à l'adresse suivante : https://knowledge2.osc-fr1.scalingo.io/
+Le projet est disponible à l'adresse suivante : https://knowledge-v2.osc-fr1.scalingo.io/
