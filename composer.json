@@ -9,7 +9,7 @@
         "php": ">=8.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "amphp/http-client": "4.2.1",
+        "amphp/http-client": "4.4.0",
         "api-platform/doctrine-orm": "^4.0",
         "api-platform/symfony": "^4.0",
         "doctrine/dbal": "^3",
