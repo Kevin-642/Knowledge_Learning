@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Cursus;
+use App\Controller\Admin\Trait\ReadOnlyTrait;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
@@ -15,19 +16,17 @@ use Symfony\Component\Validator\Constraints\File;
 
 class CursusCrudController extends AbstractCrudController
 {
-    use  Trait\ReadOnlyTrait;
+    use ReadOnlyTrait;
 
     public static function getEntityFqcn(): string
     {
         return Cursus::class;
     }
 
-    
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id_cursus')
-                ->onlyOnIndex(),
+            IdField::new('id_cursus')->onlyOnIndex(),
             TextField::new('name_cursus'),
             MoneyField::new('price')
                 ->setCurrency('EUR')
@@ -35,7 +34,7 @@ class CursusCrudController extends AbstractCrudController
             AssociationField::new('theme')
                 ->setCrudController(ThemeCrudController::class)
                 ->setLabel('Thème')
-                ->setFormTypeOptions(['placeholder' => 'Selectionner un theme ']),
+                ->setFormTypeOptions(['placeholder' => 'Sélectionner un thème']),
 
             ImageField::new('images')
                 ->setUploadDir('public/assets/cursus/images')
@@ -43,30 +42,31 @@ class CursusCrudController extends AbstractCrudController
                 ->setUploadedFileNamePattern('[randomhash].[extension]')
                 ->setFileConstraints([
                     new File([
-                        'maxSize' => '100M',               
+                        'maxSize' => '100M',
                         'mimeTypes' => [
                             'image/jpg',
                             'image/jpeg',
-                            'image/png',                 
+                            'image/png',
                         ],
                         'mimeTypesMessage' => 'Veuillez télécharger une image valide (jpg, jpeg, png)',
-                        'maxSizeMessage' => 'Veuillez télécharger une image valide 100M maximum'
+                        'maxSizeMessage' => 'Veuillez télécharger une image valide (100M maximum)',
                     ]),
                 ])
                 ->setRequired(false),
+
             TextField::new('description'),
-            
+
             CollectionField::new('lesson')
                 ->hideWhenCreating()
                 ->hideWhenUpdating(),
 
-            DateTimeField::new('createdAt', 'Créer le ')
+            DateTimeField::new('createdAt', 'Créé le')
                 ->hideOnForm()
                 ->hideWhenCreating(),
+
             DateTimeField::new('updatedAt', 'Mis à jour le')
                 ->hideOnForm()
                 ->hideWhenCreating(),
         ];
     }
-    
 }
