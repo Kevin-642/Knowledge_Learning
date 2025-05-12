@@ -1,18 +1,21 @@
+/* .alert : Styles de base pour les alertes */
 .alert {
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
-    font-weight: bold;
+    padding: 10px; /* Espacement intérieur de 10px */
+    margin: 10px 0; /* Marge verticale de 10px autour de l'alerte */
+    border-radius: 5px; /* Bordures arrondies pour une meilleure présentation */
+    font-weight: bold; /* Met le texte en gras pour le rendre plus visible */
 }
 
+/* .alert-success : Styles pour une alerte de succès */
 .alert-success {
-    background-color: #f1f8fc;
-    color: #82b864;
-    border: 1px solid #0074c7;
+    background-color: #f1f8fc; /* Fond léger bleu pour une alerte de succès */
+    color: #82b864; /* Texte vert, couleur associée au succès */
+    border: 1px solid #0074c7; /* Bordure bleue pour rappeler la couleur du fond */
 }
 
+/* .alert-error : Styles pour une alerte d'erreur */
 .alert-error {
-    background-color: #f1f8fc;
-    color: #cd2c2e;
-    border: 1px solid #0074c7;
+    background-color: #f1f8fc; /* Fond léger bleu pour une alerte d'erreur */
+    color: #cd2c2e; /* Texte rouge pour attirer l'attention sur l'erreur */
+    border: 1px solid #0074c7; /* Bordure bleue, similaire à celle de l'alerte de succès */
 }

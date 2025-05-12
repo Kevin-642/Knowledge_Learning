@@ -1,8 +1,11 @@
-<h1>Hey! Veuillez confirmer votre adresse mail!</h1>
+<h1>Bonjour ! Veuillez confirmer votre adresse e-mail</h1>
 
 <p>
-    Veuillez confirmer votre adresse e-mail en cliquant sur le lien suivant : <br><br>
-    <a href="{{ signedUrl|raw }}">Confirm my Email</a>.
-    Ce lien expirera dans {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
+    Pour finaliser votre inscription, veuillez confirmer votre adresse e-mail en cliquant sur le lien ci-dessous : <br><br>
+    <a href="{{ signedUrl|raw }}" style="color: #007BFF; text-decoration: none;">Confirmer mon e-mail</a>.<br><br>
+    Ce lien expirera dans {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}. Veuillez l'utiliser avant cette expiration pour valider votre adresse e-mail.
 </p>
 
+<p>
+    Si vous n'avez pas demandé cette confirmation, vous pouvez ignorer cet e-mail.
+</p>

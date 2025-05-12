@@ -1,9 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}success_payment{% endblock %}
+{% block title %}Paiement réussi{% endblock %}
 
 {% block body %}
-
 
 <div class="container my-2">
 
@@ -11,7 +10,8 @@
 
     <p>Merci pour votre achat. Vous pouvez maintenant accéder à vos leçons.</p>
 
-    <a href="/formation">Accéder au cours </a>
+    <a href="{{ path('formation') }}" class="btn btn-primary" role="button">Accéder au cours</a>
 
 </div>
+
 {% endblock %}

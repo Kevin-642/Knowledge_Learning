@@ -1,39 +1,46 @@
+/* Bouton principal */
 .btn {
-    background-color: #0074c7;
-    color: white;
-    width: 150px;
+    background-color: #0074c7; /* Bleu moyen pour l'arrière-plan */
+    color: white; /* Texte en blanc */
+    width: 150px; /* Largeur fixe du bouton */
 }
 
+/* Effet au survol du bouton */
 .btn:hover {
-    background-color: #00497c;
-    color: white;
+    background-color: #00497c; /* Bleu plus foncé au survol */
+    color: white; /* Le texte reste blanc */
 }
 
+/* Conteneur de boutons */
 .button {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    display: flex; /* Affiche les boutons côte à côte */
+    flex-direction: row; /* Organisation horizontale */
+    justify-content: space-around; /* Espacement équitable entre les boutons */
 }
 
+/* Image utilisée pour illustrer un cursus */
 .image-cursus {
-    width: 15%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 5px;
-    margin-left: 550px;
+    width: 15%; /* La largeur de l'image représente 15% de la largeur du conteneur parent */
+    height: 200px; /* Hauteur fixe */
+    object-fit: cover; /* L'image conserve ses proportions tout en remplissant l'espace */
+    border-radius: 5px; /* Coins légèrement arrondis */
+    margin-left: 550px; /* Décalage important vers la droite (probablement à ajuster pour une meilleure responsivité) */
 }
 
+/* Titres de niveau 3 */
 h3 {
-    text-decoration: underline;
+    text-decoration: underline; /* Soulignement du texte */
 }
 
+/* Carte ou bloc de cours */
 .card-lesson {
-    background-color: #f1f8fc;
+    background-color: #f1f8fc; /* Fond bleu clair */
 }
 
+/* Ligne de séparation visuelle */
 .separation {
-    height: 2px;
-    background-color: #82b864;
-    margin: 10px auto;
-    width: 50vw;
+    height: 2px; /* Épaisseur de la ligne */
+    background-color: #82b864; /* Vert doux pour la ligne */
+    margin: 10px auto; /* Espacement vertical, centrage horizontal */
+    width: 50vw; /* Largeur équivalente à la moitié de la largeur de la fenêtre */
 }

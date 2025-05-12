@@ -1,25 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Knowledge Learning - Plateforme e-learning et e-commerce pour la formation">
+        <meta name="author" content="Directeur Knowledge">
+        <meta name="robots" content="index, follow">
         <title>{% block title %}Knowledge Learning{% endblock %}</title>
-         <link rel="icon" href="{{ asset("assets/images/Favicon.png") }}">
-         
+        
+        <link rel="icon" href="{{ asset('assets/images/Favicon.png') }}" type="image/png">
+        
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
-
+        
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
     <body>
-        {% include '/_partials/header.html.twig'%}
-        {% include '/_partials/flash.html.twig'%}
+        {% include '/_partials/header.html.twig' %}
+        {% include '/_partials/flash.html.twig' %}
         {% block body %}{% endblock %}
-        {% include '/_partials/footer.html.twig'%}
-
-        
+        {% include '/_partials/footer.html.twig' %}
     </body>
 </html>

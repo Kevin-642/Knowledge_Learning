@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
+
 {% block title %}Les formations{% endblock %}
+
 {% block body %}
 <link rel="stylesheet" href="{{ asset('assets/css/formationIndex.css') }}" type="text/css" />
 
@@ -10,66 +12,63 @@
     <div class="text-center">
       <div class="separation"></div>
     </div>
+
     {% for theme in themes %}
+      <h2 class="mt-3">{{ theme.nameTheme }} :</h2>
 
-    <h2 class="mt-3">{{ theme.nameTheme }} :</h2>
-
-    {% for cursus in theme.cursuses %}
-    <div class="card my-2">
-      <div class="card-title mt-3">
-        <div class="d-flex justify-content-evenly">
-          <h3>{{ cursus.nameCursus }}</h3>
-        </div>
-      </div>
-      <img
-        class="image-cursus"
-        src="{{ asset('assets/cursus/images/' ~ cursus.images) }}"
-        alt="{{ cursus.nameCursus }}"
-      />
-
-      <p class="mt-2">{{ cursus.description }}</p>
-
-      <div class="d-flex flex-row">
-        {% for lesson in cursus.lesson %}
-        <div class="col-md-6">
-          <div class="d-flex flex-column mx-2 p-3 card card-lesson">
-            <h4>{{ lesson.nameLesson }}</h4>
-            <div class="d-flex justify-content-between">
-              <p>{{ lesson.description }}</p>
-              <p>{{ lesson.price }}€</p>
-            </div>
-
-            <div class="button">
-              {% if lesson in purchasedLessons or cursus in purchasedCursus %}
-                <a href="{{ path('app_cursus', { id_lesson: lesson.idLesson }) }}" class="btn">Voir la leçon</a>
-              {% else %}
-                <a href="{{ path('add_cart', { id_lesson: lesson.idLesson }) }}" class="btn">Acheter la leçon</a>
-              {% endif %}
+      {% for cursus in theme.cursuses %}
+        <div class="card my-2">
+          <div class="card-title mt-3">
+            <div class="d-flex justify-content-evenly">
+              <h3>{{ cursus.nameCursus }}</h3>
             </div>
           </div>
+          <img
+            class="image-cursus"
+            src="{{ asset('assets/cursus/images/' ~ cursus.images) }}"
+            alt="Image du cursus {{ cursus.nameCursus }}"
+          />
+
+          <p class="mt-2">{{ cursus.description }}</p>
+
+          <div class="d-flex flex-row">
+            {% for lesson in cursus.lesson %}
+              <div class="col-md-6">
+                <div class="d-flex flex-column mx-2 p-3 card card-lesson">
+                  <h4>{{ lesson.nameLesson }}</h4>
+                  <div class="d-flex justify-content-between">
+                    <p>{{ lesson.description }}</p>
+                    <p>{{ lesson.price }}€</p>
+                  </div>
+
+                  <div class="button">
+                    {% if lesson in purchasedLessons or cursus in purchasedCursus %}
+                      <a href="{{ path('app_cursus', { id_lesson: lesson.idLesson }) }}" class="btn">Voir la leçon</a>
+                    {% else %}
+                      <a href="{{ path('add_cart', { id_lesson: lesson.idLesson }) }}" class="btn">Acheter la leçon</a>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+
+          {# Vérification de l'état de l'achat du cursus #}
+          <div class="d-flex justify-content-evenly text-center mt-2">
+            {% if cursus in purchasedCursus %}
+              <p>Vous avez acheté ce cursus.</p>
+            {% elseif cursus in cursusWithAllLessonsPurchased %}
+              <p>Vous avez toutes les leçons de ce cursus.</p>
+            {% elseif cursus in cursusWithSomeLessonsPurchased %}
+              <p>Vous avez acheté au moins une leçon dans ce cursus. <b>Vous ne pouvez plus acheter ce cours</b>. <br> Si vous voulez accéder aux autres leçons, <b>veuillez les acheter individuellement.</b></p>
+            {% else %}
+              <p>L'ensemble du cursus coûte {{ cursus.price }}€</p>
+              <a href="{{ path('add_cart', { id_cursus: cursus.idCursus }) }}" class="btn mb-2">Acheter tout le cursus</a>
+            {% endif %}
+          </div>
+
         </div>
-        {% endfor %}
-      </div>
-      {% if cursus in purchasedCursus %}
-        <div class="d-flex justify-content-evenly text-center mt-2">
-          <p>Vous avez acheté ce cursus.</p>
-        </div>
-      {% elseif cursus in cursusWithAllLessonsPurchased %}
-        <div class="d-flex justify-content-evenly text-center mt-2">
-          <p>Vous avez toutes les leçons de ce cursus.</p>
-        </div>
-      {% elseif cursus in cursusWithSomeLessonsPurchased %}
-        <div class="d-flex justify-content-evenly text-center mt-2">
-          <p>Vous avez acheté au moins une leçons dans ce cours. <b> Vous ne pouvez plus acheter ce cours</b>. <br> Si vous voulez acceder aux autres leçons, <b>veuillez les acheter individuellement.</b></p>
-        </div>
-      {% else%}
-        <div class="d-flex justify-content-evenly text-center mt-2">
-          <p>L'ensemble du cursus coûte {{ cursus.price }}€</p>
-          <a href="{{ path('add_cart', { id_cursus: cursus.idCursus }) }}" class="btn mb-2">Acheter tout le cursus</a>
-        </div>
-      {% endif %}
-    </div>
-    {% endfor %}
+      {% endfor %}
     {% endfor %}
   </div>
 </div>

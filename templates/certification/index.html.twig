@@ -1,4 +1,8 @@
-{% extends 'base.html.twig' %} {% block title %}Certifications{% endblock %} {% block body %}
+{{% extends 'base.html.twig' %}
+
+{% block title %}Certifications{% endblock %}
+
+{% block body %}
 <link rel="stylesheet" href="{{ asset('assets/css/certifications.css') }}" type="text/css" />
 
 <div class="container my-3">
@@ -8,34 +12,35 @@
     <div class="separation"></div>
 
     {% if certifications is empty %}
-    <p>
-      Vous n'avez pas encore de certifications. Continuez à apprendre et validez vos leçons pour en
-      obtenir !
-    </p>
+      <p>
+        Vous n'avez pas encore de certifications. Continuez à apprendre et validez vos leçons pour en obtenir !
+      </p>
+    {% else %}
+      {% for themeData in certifications %}
+        <h2 class="theme mt-4 mb-2">{{ themeData.theme.nameTheme }}</h2>
 
-    {% else %} 
-    {% for themeData in certifications %}
-
-    <h2 class=" theme  mt-4 mb-2">{{ themeData.theme.nameTheme }}</h2>
-
-    {% for cursusData in themeData.cursusList %}
-    <div class="cursus mx-3 my-2">
-        <h3 >{{ cursusData.cursus.nameCursus }}</h3>
-    </div>
-    <ul class="ul-cursus">
-      {% for lessonData in cursusData.lessonsList %}
-      <li class="li-lesson">
-        <img
-          class="certification-img"
-          src="{{ asset('assets/cursus/images/certification/'~ lessonData.lesson.certificationImage) }}"
-          alt="{{ lessonData.lesson.nameLesson }}"
-        />
-        <p>{{ lessonData.lesson.nameLesson }}</p>
-        <p>Obtenue le : {{lessonData.obtainedAt|date('d/m/Y')}}</p>
-      </li>
+        {% for cursusData in themeData.cursusList %}
+          <div class="cursus mx-3 my-2">
+            <h3>{{ cursusData.cursus.nameCursus }}</h3>
+          </div>
+          
+          <ul class="ul-cursus">
+            {% for lessonData in cursusData.lessonsList %}
+              <li class="li-lesson">
+                <img
+                  class="certification-img"
+                  src="{{ asset('assets/cursus/images/certification/' ~ lessonData.lesson.certificationImage) }}"
+                  alt="Certification pour {{ lessonData.lesson.nameLesson }}"
+                />
+                <p>{{ lessonData.lesson.nameLesson }}</p>
+                <p>Obtenue le : {{ lessonData.obtainedAt|date('d/m/Y') }}</p>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endfor %}
       {% endfor %}
-    </ul>
-    {% endfor %} {% endfor %} {% endif %}
+    {% endif %}
   </div>
 </div>
+
 {% endblock %}

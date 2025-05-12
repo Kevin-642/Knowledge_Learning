@@ -1,25 +1,62 @@
+/* .footer-container : Conteneur principal du pied de page */
 .footer-container {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #f1f8fc !important;
+    display: flex; /* Utilisation de Flexbox pour organiser les éléments */
+    justify-content: space-evenly; /* Espacement égal entre les éléments enfants */
+    align-items: center; /* Centrage vertical des éléments enfants */
+    padding: 10px 20px; /* Espacement intérieur (padding) de 10px en haut et en bas, 20px à gauche et à droite */
+    background-color: #f1f8fc !important; /* Fond bleu clair avec une priorité importante pour l'application de la couleur */
+    flex-wrap: wrap; /* Permet aux éléments de s'organiser en plusieurs lignes en cas de besoin */
 }
 
+/* .footer-logo img : Style de l'image du logo dans le pied de page */
 .footer-logo img {
-    width: 150px !important;
+    width: 150px !important; /* Largeur de l'image fixée à 150px, avec priorité pour s'assurer qu'elle s'applique */
 }
 
+/* .footer-info : Style du texte d'information dans le pied de page */
 .footer-info {
-    line-height:  0.5em;
+    line-height: 0.5em; /* Réduit l'interligne pour rapprocher les lignes de texte */
+    text-align: center; /* Centrer le texte pour plus de lisibilité */
 }
 
+/* .footer-title : Style du titre dans le pied de page */
 .footer-title { 
-    font-size: 1.25rem;
-    font-weight: bold;
-    margin-bottom: 1.5rem;
+    font-size: 1.25rem; /* Taille de police du titre définie à 1.25rem */
+    font-weight: bold; /* Texte en gras pour le rendre plus visible */
+    margin-bottom: 1.5rem; /* Marge inférieure pour espacer le titre des éléments suivants */
+    text-align: center; /* Centrer le titre */
 }
 
+/* .logo : Style appliqué au fond du logo (probablement une image ou un élément lié au logo) */
 .logo {
-    background-color: #f1f8fc !important;
+    background-color: #f1f8fc !important; /* Fond bleu clair pour l'élément avec priorité pour s'assurer que le fond est bien appliqué */
+}
+
+/* Media queries pour ajuster le footer sur les écrans mobiles */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column; /* Disposition en colonne pour les petits écrans */
+        align-items: center; /* Aligner tous les éléments au centre */
+        text-align: center; /* Alignement central du texte */
+    }
+
+    .footer-logo img {
+        width: 120px !important; /* Ajuster la taille du logo pour les petits écrans */
+        margin-bottom: 10px; /* Ajouter une marge sous le logo pour un espacement propre */
+    }
+
+    .footer-info {
+        margin-top: 10px; /* Ajouter un espacement entre les infos */
+    }
+
+    .footer-title {
+        font-size: 1.1rem; /* Réduire la taille du titre pour s'adapter aux écrans plus petits */
+        margin-bottom: 1rem; /* Réduire l'espacement sous le titre */
+    }
+
+    /* Ajouter une largeur de base pour éviter que les éléments se chevauchent */
+    .footer-logo, .footer-info, .footer-title {
+        flex-basis: 100%; /* Assurez-vous que chaque élément occupe toute la largeur de la ligne */
+        margin-bottom: 15px; /* Un peu d'espace en dessous de chaque élément */
+    }
 }

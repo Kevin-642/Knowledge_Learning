@@ -1,29 +1,38 @@
+/* Conteneur principal du reset */
 .reset {
     display: flex;
-    justify-content: space-around;
+    justify-content: center; /* Centré sur tous les écrans */
     align-items: center;
-    width: 50%;
-    margin-top: 2rem;   
-    margin-bottom: 2rem;
+    flex-direction: column;
+    width: 100%;
+    margin: 2rem auto;
 }
 
+/* Formulaire de réinitialisation */
 .reset-form {
-    width: 20vw;
+    width: 100%;
+    max-width: 400px;
     border: 1px solid #444;
-    padding: 15px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Bouton réutilisable (déjà utilisé dans .request) */
 .button {
     background-color: #0074c7;
-    border: #0074c7 solid 1px;
-    border-radius: 5px;
+    border: 1px solid #0074c7;
+    border-radius: 25px;
     color: white;
+    padding: 10px 20px;
     margin-top: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .button:hover {
     background-color: #00497c;
-    border:#00497c solid 1px;
-    border-radius: 5px;
+    border-color: #00497c;
     color: white;
 }

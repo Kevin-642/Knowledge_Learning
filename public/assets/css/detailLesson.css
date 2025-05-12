@@ -1,60 +1,70 @@
+/* .btn : Style des boutons avec fond bleu et bords arrondis */
 .btn {
-    height: 40px;
-    width: 150px;
-    background-color: #00497c !important;
-    border: #00497c 1px solid;
-    color: white;
-    border-radius: 50px;
-    margin: 5px;
+    height: 40px; /* Hauteur du bouton */
+    width: 150px; /* Largeur du bouton */
+    background-color: #00497c !important; /* Couleur de fond bleu (important pour garantir l'application de la règle) */
+    border: #00497c 1px solid; /* Bordure bleu, 1px d'épaisseur */
+    color: white; /* Texte en blanc */
+    border-radius: 50px; /* Bords arrondis pour un effet circulaire */
+    margin: 5px; /* Marge autour du bouton */
 }
 
+/* .button : Container flexible centré */
 .button {
-    display:flex;
-    justify-content: center;
+    display: flex; /* Utilisation de Flexbox pour la mise en page */
+    justify-content: center; /* Centrer les éléments horizontalement */
 }
 
+/* video : Style pour les vidéos avec largeur pleine */
 video {
-    width: 100% !important;    
+    width: 100% !important; /* Assurer que la vidéo prend toute la largeur disponible */
 }
 
+/* .block : Container flexible en colonne, centré */
 .block {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+    display: flex; /* Utilisation de Flexbox pour la mise en page */
+    justify-content: center; /* Centrer les éléments horizontalement */
+    flex-direction: column; /* Aligner les éléments en colonne */
 }
 
+/* .block-center : Aligne le texte à gauche */
 .block-center {
-    text-align: start;
+    text-align: start; /* Aligner le texte à gauche */
 }
 
+/* .separation : Ligne de séparation verte */
 .separation {
-    height: 2px;
-    background-color: #82b864;
-    margin: 10px auto;
-    width: 50vw;
+    height: 2px; /* Hauteur de la ligne */
+    background-color: #82b864; /* Couleur de fond verte */
+    margin: 10px auto; /* Espacement vertical de 10px, centré horizontalement */
+    width: 50vw; /* Largeur de 50% de la fenêtre */
 }
 
+/* .certification : Style pour le bloc de certification, avec ombre */
 .certification {
-    display: flex;
-    flex-direction: column;
-    box-shadow: 10px 5px 15px #384050;
-    margin-top: 1rem !important;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    display: flex; /* Utilisation de Flexbox pour la mise en page */
+    flex-direction: column; /* Disposition en colonne */
+    box-shadow: 10px 5px 15px #384050; /* Ombre portée avec décalage et flou */
+    margin-top: 1rem !important; /* Marge en haut de 1rem */
+    padding-top: 1rem; /* Espacement en haut de 1rem */
+    padding-bottom: 1rem; /* Espacement en bas de 1rem */
 }
 
+/* .certification-img : Image de certification circulaire */
 .certification-img {
-    border-radius: 50%;
-    width: 120px;
+    border-radius: 50%; /* Bordure arrondie pour l'image circulaire */
+    width: 120px; /* Largeur de l'image */
 }
 
+/* .block-certif : Container flexible pour les éléments de certification */
 .block-certif {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    margin: 1rem;
+    display: flex; /* Utilisation de Flexbox pour la mise en page */
+    justify-content: space-evenly; /* Espacement égal entre les éléments */
+    align-items: center; /* Centrer les éléments verticalement */
+    margin: 1rem; /* Marge autour du bloc */
 }
 
+/* .titre-certif : Taille de police pour le titre de certification */
 .titre-certif {
-    font-size: 1.5rem;
+    font-size: 1.5rem; /* Taille de police de 1.5rem pour le titre */
 }

@@ -14,51 +14,53 @@
         <div class="text-center">
             <div class="separation"></div>
         </div>
-        
 
-    <table>
-        <thead>
-            <tr>
-                <th>Nom de l'élèment</th>
-                <th>Prix</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        {% for item in cartItems%}
+        {% if cartItems is empty %}
+            <p>Aucun article dans le panier.</p>
+        {% else %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nom de l'élèment</th>
+                        <th>Prix</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cartItems %}
+                        <tr>
+                            <td>
+                                {% if item.cursus %}
+                                    {{ item.cursus.nameCursus }} 
+                                {% elseif item.lesson %}
+                                    {{ item.lesson.nameLesson }} 
+                                {% endif %}
+                            </td>
 
-    <tbody>
-        <tr>
-            <td>
-                {% if item.cursus %}
-                    {{ item.cursus.nameCursus }} 
-                {% elseif item.lesson %}
-                    {{ item.lesson.nameLesson }} 
-                {% endif %}
-            </td>
+                            <td>
+                                {% if item.cursus %}
+                                    {{ item.cursus.price|number_format(2, ',', ' ') }} €
+                                {% elseif item.lesson %}
+                                    {{ item.lesson.price|number_format(2, ',', ' ') }} €
+                                {% endif %}
+                            </td>
 
-            <td>
-                {% if item.cursus %}
-                    {{ item.cursus.price }} €
-                {% elseif item.lesson %}
-                    {{ item.lesson.price }} €
-                {% endif %}
-            </td>
+                            <td>
+                                <form action="{{ path('remove_cart_item', {id_cart: item.idCart}) }}" method="post">
+                                    <button type="submit" class="delete" aria-label="Retirer cet élément du panier">Retirer</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
 
-            <td>
-                <form action="{{ path('remove_cart_item', {id_cart: item.idCart}) }}" method="post">
-                    
-                    <button type="submit" class="delete">Retirer</button>
-                </form>
-            </td>
-        </tr>
-    </tbody>
-    {% endfor %}
-</table>
-    
-    <div class="button">
-        <a href="/create-checkout-session" class="btn">valider la commande</a>
+        <div class="button">
+            <a href="/create-checkout-session" class="btn">Valider la commande</a>
+        </div>
+
     </div>
-    
-   </div>
 </div>
+
 {% endblock %}

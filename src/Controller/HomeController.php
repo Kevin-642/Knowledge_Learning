@@ -8,9 +8,11 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class HomeController extends AbstractController
 {
+    // Route pour la page d'accueil de l'application
     #[Route('/', name: 'app_home')]
     public function index(): Response
     {
+        // Rend la vue de la page d'accueil
         return $this->render('home/index.html.twig');
     }
 }

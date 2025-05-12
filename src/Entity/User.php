@@ -14,6 +14,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+// Déclaration de l'entité User exposée via API Platform avec 3 opérations GET (collection et élément) + POST (création)
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ApiResource(
     operations:[
@@ -22,59 +23,69 @@ use Symfony\Component\Security\Core\User\UserInterface;
         new Post()
     ]
 )]
+// Contrainte d’unicité sur l’email (niveau base de données et validation Symfony)
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
-#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+#[UniqueEntity(fields: ['email'], message: 'Il existe déjà un compte avec cet e-mail')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    // Identifiant unique de l’utilisateur
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id_user = null;
 
+    // Email de l’utilisateur (doit être unique)
     #[ORM\Column(length: 180)]
     private ?string $email = null;
 
-    /**
-     * @var list<string> The user roles
-     */
+    // Tableau des rôles (ex : ROLE_USER, ROLE_ADMIN, etc.)
     #[ORM\Column]
     private array $roles = [];
 
-    /**
-     * @var string The hashed password
-     */
+    // Mot de passe haché
     #[ORM\Column]
     private ?string $password = null;
 
+    // Nom d’utilisateur (affiché par exemple sur le site)
     #[ORM\Column(length: 255)]
     private ?string $username = null;
 
+    // Date de création du compte
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
+    // Date de dernière mise à jour
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
 
+    // Indique si l’adresse e-mail a été vérifiée
     #[ORM\Column]
     private bool $isVerified = false;
 
-    /**
-     * @var Collection<int, Purchase>
-     */
+    // Liste des achats effectués par cet utilisateur
     #[ORM\OneToMany(targetEntity: Purchase::class, mappedBy: 'user')]
     private Collection $purchases;
 
-    /**
-     * @var Collection<int, Certification>
-     */
+    // Liste des certifications obtenues par cet utilisateur
     #[ORM\OneToMany(targetEntity: Certification::class, mappedBy: 'user')]
     private Collection $certifications;
 
+    // Constructeur : initialise les dates et collections
+    public function __construct()
+    {
+        $this->createdAt = new \DateTimeImmutable();
+        $this->updatedAt = new \DateTimeImmutable();
+        $this->purchases = new ArrayCollection();
+        $this->certifications = new ArrayCollection();
+    }
+
+    // Getter pour l’ID
     public function getId(): ?int
     {
         return $this->id_user;
     }
 
+    // Getter/Setter pour l’email
     public function getEmail(): ?string
     {
         return $this->email;
@@ -83,54 +94,31 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmail(string $email): static
     {
         $this->email = $email;
-
         return $this;
     }
 
-    public function __construct()
-    {
-        $this->createdAt = new \DateTimeImmutable();
-        $this->updatedAt = new \DateTimeImmutable();
-        $this->purchases = new ArrayCollection();
-        $this->certifications = new ArrayCollection();
-    }
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
+    // Représentation textuelle de l’utilisateur dans le système de sécurité
     public function getUserIdentifier(): string
     {
         return (string) $this->email;
     }
 
-    /**
-     * @see UserInterface
-     *
-     * @return list<string>
-     */
+    // Getter pour les rôles, ajoute automatiquement ROLE_USER
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
-
         return array_unique($roles);
     }
 
-    /**
-     * @param list<string> $roles
-     */
+    // Setter pour les rôles
     public function setRoles(array $roles): static
     {
         $this->roles = $roles;
-
         return $this;
     }
 
-    /**
-     * @see PasswordAuthenticatedUserInterface
-     */
+    // Getter/Setter pour le mot de passe
     public function getPassword(): ?string
     {
         return $this->password;
@@ -139,19 +127,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPassword(string $password): static
     {
         $this->password = $password;
-
         return $this;
     }
 
-    /**
-     * @see UserInterface
-     */
+    // Efface les informations sensibles temporaires (ex : mot de passe en clair)
     public function eraseCredentials(): void
     {
-        // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
 
+    // Getter/Setter pour le nom d'utilisateur
     public function getUsername(): ?string
     {
         return $this->username;
@@ -160,10 +145,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setUsername(string $username): static
     {
         $this->username = $username;
-
         return $this;
     }
 
+    // Getter/Setter pour les dates de création et mise à jour
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;
@@ -172,7 +157,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
-
         return $this;
     }
 
@@ -184,10 +168,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
-
         return $this;
     }
 
+    // Vérification de compte (ex: email vérifié via lien)
     public function isVerified(): bool
     {
         return $this->isVerified;
@@ -196,12 +180,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setVerified(bool $isVerified): static
     {
         $this->isVerified = $isVerified;
-
         return $this;
     }
 
+    // GESTION DES RELATIONS AVEC PURCHASES
+
     /**
-     * @return Collection<int, Purchase>
+     * Retourne tous les achats de l'utilisateur
      */
     public function getPurchases(): Collection
     {
@@ -221,7 +206,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removePurchase(Purchase $purchase): static
     {
         if ($this->purchases->removeElement($purchase)) {
-            // set the owning side to null (unless already changed)
             if ($purchase->getUser() === $this) {
                 $purchase->setUser(null);
             }
@@ -230,8 +214,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    // GESTION DES RELATIONS AVEC CERTIFICATIONS
+
     /**
-     * @return Collection<int, Certification>
+     * Retourne toutes les certifications de l'utilisateur
      */
     public function getCertifications(): Collection
     {
@@ -251,7 +237,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeCertification(Certification $certification): static
     {
         if ($this->certifications->removeElement($certification)) {
-            // set the owning side to null (unless already changed)
             if ($certification->getUser() === $this) {
                 $certification->setUser(null);
             }

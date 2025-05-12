@@ -1,64 +1,77 @@
+/* Conteneur principal du header */
 .header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #f1f8fc !important;
+    display: flex; /* Utilisation de Flexbox pour organiser les éléments en ligne */
+    justify-content: space-between; /* Espacement égal entre le logo et le menu */
+    align-items: center; /* Alignement vertical des éléments au centre */
+    padding: 10px 20px; /* Espacement intérieur du conteneur (padding) */
+    background-color: #f1f8fc !important; /* Couleur de fond du header */
 }
 
+/* Logo */
 .header-logo img {
-    width: 150px !important;
-    background-color: #f1f8fc !important;
+    width: 150px !important; /* Fixe la largeur du logo à 150px */
+    background-color: #f1f8fc !important; /* Ajoute une couleur de fond au logo (par défaut) */
 }
 
+/* Menu principal */
 .header-nav ul {
-    display: flex;
-    list-style-type: none;
-    gap: 20px;
+    display: flex; /* Utilisation de Flexbox pour organiser les éléments du menu en ligne */
+    list-style-type: none; /* Suppression des puces de la liste */
+    gap: 20px; /* Espacement entre les éléments du menu */
+    padding: 0; /* Suppression du padding de la liste */
+    margin: 0; /* Suppression de la marge de la liste */
 }
 
+/* Éléments de menu */
 .header-nav ul li {
-    display: inline;
-    text-transform: uppercase;
+    display: inline; /* Affiche les éléments du menu en ligne */
+    text-transform: uppercase; /* Met le texte en majuscules */
 }
 
+/* Liens */
 .header-nav ul li a {
-    text-decoration: none;
-    color: #0074c7;
-    font-weight: normal;
+    text-decoration: none; /* Suppression de la décoration des liens */
+    color: #0074c7; /* Couleur des liens */
+    font-weight: normal; /* Poids de police normal pour les liens */
 }
 
+/* Liens au survol */
 .navber-nav .nav-link:hover {
-    color: #f1f8fc !important;
-    font-weight: bold;
-    padding: 5px;
-    border-radius: 50px;
-    border: 1px solid #00497c;
-    background-color: #00497c !important;
+    color: #f1f8fc !important; /* Couleur du texte lors du survol */
+    font-weight: bold; /* Gras pour les liens au survol */
+    padding: 5px; /* Espacement intérieur lors du survol */
+    border-radius: 50px; /* Bord arrondi pour les liens au survol */
+    border: 1px solid #00497c; /* Bordure des liens au survol */
+    background-color: #00497c !important; /* Couleur de fond des liens au survol */
 }
 
+/* Lien actif */
 .navbar-nav .nav-link.active {
-    color: #f1f8fc !important;
-    font-weight: bold;
-    padding: 5px;
-    border-radius: 50px;
-    border: 1px solid #0074c7;
-    background-color: #0074c7 !important;
+    color: #f1f8fc !important; /* Couleur du lien actif */
+    font-weight: bold; /* Gras pour le lien actif */
+    padding: 5px; /* Espacement intérieur du lien actif */
+    border-radius: 50px; /* Bord arrondi pour le lien actif */
+    border: 1px solid #0074c7; /* Bordure du lien actif */
+    background-color: #0074c7 !important; /* Couleur de fond du lien actif */
 }
 
+/* Centrage de la barre de navigation */
 .navbar-collapse {
-    justify-content: center;
+    justify-content: center; /* Centre les éléments de la barre de navigation */
 }
 
+/* Menu de la barre de navigation */
 .navbar-nav {
-    text-align: center;
-    width: auto;
+    text-align: center; /* Alignement du texte au centre */
+    width: auto; /* Largeur automatique pour les éléments du menu */
 }
 
-.navnbar-nav .nav-item {
-    margin: 5px 0;
+/* Espacement entre les éléments du menu */
+.navbar-nav .nav-item {
+    margin: 5px 0; /* Marge verticale entre les éléments du menu */
 }
 
+/* Liens dans la barre de navigation */
 .navbar-nav .nav-link {
-    padding: 8px 15px;
+    padding: 8px 15px; /* Espacement intérieur des liens du menu */
 }

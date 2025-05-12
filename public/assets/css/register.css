@@ -1,37 +1,60 @@
+/* Conteneur principal du bloc d'enregistrement */
 .register {
     display: flex;
-    justify-content: space-around;
+    justify-content: center; /* Centrage horizontal */
     align-items: center;
-    width: 50%;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    width: 100%; /* Utilise toute la largeur disponible */
+    margin: 2rem auto;
+    flex-direction: column; /* Empilage vertical pour petits écrans */
 }
 
+/* Formulaire d'inscription */
 .register-form {
-    width: 20vw;
+    width: 100%;
+    max-width: 400px;
     border: 1px solid #444;
-    padding: 15px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Conteneur du formulaire */
 .form {
     display: flex;
+    flex-direction: column; /* Empilage vertical des champs */
+    gap: 1rem; /* Espacement entre les éléments */
 }
 
+/* Titre du formulaire d'inscription */
 .titre-register {
     font-size: 1.5rem;
     margin-top: 0;
-    margin-bottom: 5;
+    margin-bottom: 0.5rem;
+    text-align: center;
 }
 
+/* Ligne de séparation visuelle */
 .separation {
     width: 80%;
     height: 3px;
     background-color: #82b864;
-    margin: 5px;
+    margin: 10px auto;
+    border-radius: 2px;
 }
 
+/* Bouton du formulaire */
 button {
     background-color: #82b864;
     color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
     margin-top: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #6aa24d;
 }

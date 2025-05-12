@@ -1,3 +1,4 @@
+# Configuration pour l'environnement de développement (dev)
 when@dev:
     web_profiler:
         toolbar: true
@@ -8,6 +9,7 @@ when@dev:
             only_exceptions: false
             collect_serializer_data: true
 
+# Configuration pour l'environnement de test (test)
 when@test:
     web_profiler:
         toolbar: false

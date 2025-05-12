@@ -1,33 +1,53 @@
+/* Conteneur principal du formulaire de sécurité */
 .security-form {
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 50%;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    margin: 2rem auto; /* Centrage horizontal + marges haut/bas */
+    flex-direction: column; /* Pour une meilleure empilabilité sur petits écrans */
 }
 
+/* Bloc du formulaire de connexion */
 .login-form {
-    width: 20vw;
+    width: 100%; /* On utilise 100% du conteneur parent pour plus de flexibilité */
+    max-width: 400px; /* Limite la largeur pour éviter un formulaire trop large */
     border: 1px solid #444;
-    padding: 15px;
+    padding: 20px;
+    border-radius: 8px; /* Coins arrondis pour un style plus moderne */
+    background-color: #f9f9f9; /* Couleur claire pour lisibilité */
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* Légère ombre */
 }
 
+/* Conteneur de séparation visuelle */
 .separation-form {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 1rem 0;
 }
 
+/* Barre de séparation */
 .separation {
     width: 80%;
     height: 3px;
     background-color: #82b864;
-    margin: 5px;
+    border-radius: 2px;
+    margin: 5px auto;
 }
 
+/* Bouton */
 button {
     background-color: #82b864;
     color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
     margin-top: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #6aa24d; /* Teinte légèrement plus foncée au survol */
 }

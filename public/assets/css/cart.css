@@ -1,55 +1,65 @@
+/* .row : Container avec un layout flex pour centrer le contenu */
 .row {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 2rem;
+    display: flex; /* Utilisation de Flexbox pour un layout flexible */
+    justify-content: center; /* Centrer le contenu horizontalement */
+    align-items: center; /* Centrer le contenu verticalement */
+    margin-top: 2rem; /* Espacement au-dessus du container */
 }
 
+/* h1 : Enlever la marge par défaut du titre h1 */
 h1 {
-    margin: 0;
+    margin: 0; /* Supprimer la marge par défaut du h1 */
 }
 
+/* .separation : Ligne de séparation verte, utilisée pour diviser les sections */
 .separation {
-    height: 2px;
-    background-color: #82b864;
-    margin: 2rem auto;
-    width: 50vw;
+    height: 2px; /* Hauteur de la ligne de séparation */
+    background-color: #82b864; /* Couleur de fond : vert */
+    margin: 2rem auto; /* Espacement vertical, centré horizontalement */
+    width: 50vw; /* Largeur de 50% de la largeur de la fenêtre */
 }
 
+/* table : Espacement sous la table */
 table {
-    margin-bottom: 2rem;
+    margin-bottom: 2rem; /* Espacement sous la table */
 }
 
+/* thead : Couleur de fond des entêtes de table */
 thead {
-    background-color: #f1f8fc;
+    background-color: #f1f8fc; /* Couleur de fond pour l'entête de table */
 }
 
+/* th : Bordure et padding pour les cellules d'entête de la table */
 th {
-    border: 1px solid #384050;
-    padding: 8px 10px;
+    border: 1px solid #384050; /* Bordure grise pour les cellules d'entête */
+    padding: 8px 10px; /* Espacement interne des cellules */
 }
 
+/* td : Bordure et padding pour les cellules de la table */
 td {
-    border: 1px solid #384050;
-    padding: 8px 10px;
+    border: 1px solid #384050; /* Bordure grise pour les cellules de données */
+    padding: 8px 10px; /* Espacement interne des cellules */
 }
 
+/* .button : Style pour les boutons, avec un fond bleu et bordures arrondies */
 .button {
-    margin-bottom: 2rem;
-    background-color: #0074c7;
-    border-radius: 5px;
-    text-decoration: none;
-    width: auto;
+    margin-bottom: 2rem; /* Espacement sous le bouton */
+    background-color: #0074c7; /* Couleur de fond bleue */
+    border-radius: 5px; /* Coins arrondis */
+    text-decoration: none; /* Retirer la décoration de texte (souligné) */
+    width: auto; /* Largeur automatique */
 }
 
+/* .btn : Couleur du texte des boutons */
 .btn {
-    color: white !important;
+    color: white !important; /* Forcer la couleur du texte à blanc */
 }
 
+/* .delete : Style pour les boutons de suppression, fond rouge avec bordure */
 .delete {
-    background-color: red;
-    color: white;
-    border: #cd2c2e 1px solid;
-    border-radius: 5px;
-    padding: 5px;
+    background-color: red; /* Couleur de fond rouge */
+    color: white; /* Texte en blanc */
+    border: #cd2c2e 1px solid; /* Bordure rouge pour le bouton */
+    border-radius: 5px; /* Coins arrondis */
+    padding: 5px; /* Espacement interne pour le bouton */
 }

@@ -10,58 +10,65 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class SecurityControllerTest extends WebTestCase
 {
-    private KernelBrowser $client;
-    private EntityManagerInterface $entityManager;
-    private UserPasswordHasherInterface $passwordHasher;
+    private KernelBrowser $client; // Client HTTP pour simuler les requêtes
+    private EntityManagerInterface $entityManager; // Entité pour gérer la persistance des données
+    private UserPasswordHasherInterface $passwordHasher; // Service pour hacher le mot de passe de l'utilisateur
   
-    protected function setUp():void
+    // Méthode appelée avant chaque test pour configurer l'environnement
+    protected function setUp(): void
     {
-        //Récupération des services necessaires
-        $this->client = static::createClient();
-        $container = static::getContainer();
+        // Récupération des services nécessaires pour le test
+        $this->client = static::createClient(); // Création du client de test
+        $container = static::getContainer(); // Récupération du conteneur de services Symfony
 
+        // Récupération de l'EntityManager pour interagir avec la base de données
         $this->entityManager = $container->get(EntityManagerInterface::class);
+        // Récupération du service de hachage des mots de passe
         $this->passwordHasher = $container->get(UserPasswordHasherInterface::class);
 
-        //Verification si l'utilisateur existe déjà
+        // Vérification si un utilisateur avec l'email 'johndoe@gmail.com' existe déjà dans la base
         $userRepository = $this->entityManager->getRepository(User::class);
-        $existingUser = $userRepository->findOneBy(['email'=>'johndoe@gmail.com']);
+        $existingUser = $userRepository->findOneBy(['email' => 'johndoe@gmail.com']);
 
-        //création de l'utilisateur si il n'existe pas
-        if(!$existingUser){
-            $user = new User();
-            $user -> setUsername('John Doe');
-            $user -> setEmail('johndoe@gmail.com');
-            $user -> setRoles(['ROLE_USER']);
-            $user -> setVerified(true);
-            $user -> setPassword($this->passwordHasher->hashPassword($user,'admin0123'));
+        // Si l'utilisateur n'existe pas, on le crée pour le test
+        if (!$existingUser) {
+            $user = new User(); // Création d'un nouvel utilisateur
+            $user->setUsername('John Doe'); // Nom d'utilisateur
+            $user->setEmail('johndoe@gmail.com'); // Email de l'utilisateur
+            $user->setRoles(['ROLE_USER']); // Attribuer le rôle utilisateur
+            $user->setVerified(true); // Marquer l'utilisateur comme vérifié
+            // Hachage du mot de passe pour l'utilisateur
+            $user->setPassword($this->passwordHasher->hashPassword($user, 'admin0123'));
 
+            // Persister et sauvegarder l'utilisateur dans la base de données
             $this->entityManager->persist($user);
             $this->entityManager->flush();
         }
     }
     
+    // Test de la connexion de l'utilisateur
     public function testLoginUser()
     {
-        //Accès a la page de connexion
-
+        // Accès à la page de connexion
         $crawler = $this->client->request('GET', '/login');
-        //verification du chargement de la page et si un formulaire est présent dessus
+        
+        // Vérification que la réponse est réussie et que la page de connexion contient un formulaire
         $this->assertResponseIsSuccessful();
-        $this->assertSelectorExists('form');
+        $this->assertSelectorExists('form'); // Vérifie que le formulaire de connexion est bien présent
 
-        //soumission du formulaire d'inscription
+        // Soumission du formulaire de connexion avec les informations de l'utilisateur
         $form = $crawler->selectButton('Connexion')->form([
-            'email'=>'johndoe@gmail.com',
-            'password'=>'admin0123',
+            'email' => 'johndoe@gmail.com', // Email de l'utilisateur
+            'password' => 'admin0123', // Mot de passe
         ]);
 
+        // Soumission du formulaire
         $this->client->submit($form);
 
-        //Verification de la redirection après connexion
-        $this->assertResponseRedirects('/');
+        // Vérification que l'utilisateur est redirigé vers la page d'accueil après connexion
+        $this->assertResponseRedirects('/'); // Vérification de la redirection
 
-        $this->client->followRedirect();
+        // Suivi de la redirection
+        $this->client->followRedirect(); // Suivi de la redirection pour confirmer l'accès à la page d'accueil
     }
-
 }

@@ -1,40 +1,45 @@
-{% extends 'base.html.twig' %} {% block title %}{{ lesson.nameLesson }}{% endblock %} {% block body
-%}
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ lesson.nameLesson }}{% endblock %}
+
+{% block body %}
 <link rel="stylesheet" href="{{ asset('assets/css/detailLesson.css') }}" type="text/css" />
 
 <div class="container d-flex flex-column align-items-center my-3">
-  <div class="row">
-    <div class="block">
-      <h1>{{ lesson.nameLesson }}</h1>
+    <div class="row">
+        <div class="block">
+            <h1>{{ lesson.nameLesson }}</h1>
 
-      <div class="d-flex text-center">
-        <div class="separation"></div>
-      </div>
+            <div class="d-flex text-center">
+                <div class="separation"></div>
+            </div>
 
-      <div class="block-center">
-        <p>{{ lesson.content }}</p>
-        <video src="{{ asset('assets/cursus/videos/' ~ lesson.videoUrl) }}" controls></video>
-      </div>
+            <div class="block-center">
+                <p>{{ lesson.content }}</p>
+                <video src="{{ asset('assets/cursus/videos/' ~ lesson.videoUrl) }}" controls>
+                    <track kind="captions" src="{{ asset('assets/cursus/videos/' ~ lesson.videoUrl ~ '.vtt') }}" label="Français" srclang="fr">
+                    Votre navigateur ne supporte pas les vidéos HTML5.
+                </video>
+            </div>
 
-      {% if certification %}
-      <div class="mt-2 certification text-center">
-        
-          <h2 class="titre-certif">Certification Obtenue ! </h2>
-        
-        <div class="block-certif">
-          <img class="certification-img" src="{{ asset('assets/cursus/images/certification/'~ lesson.certificationImage) }}" alt="{{lesson.nameLesson}}">
-          <p>  Obtenue le : {{ certification.obtainedAt ? certification.obtainedAt|date('d-m-Y') : 'N/A' }}</p>
+            {% if certification %}
+                <div class="mt-2 certification text-center">
+                    <h2 class="titre-certif">Certification Obtenue ! </h2>
+                    <div class="block-certif">
+                        <img class="certification-img" 
+                             src="{{ asset('assets/cursus/images/certification/' ~ lesson.certificationImage) }}" 
+                             alt="Certification pour {{ lesson.nameLesson }} obtenue">
+                        <p>Obtenue le : {{ certification.obtainedAt ? certification.obtainedAt|date('d-m-Y') : 'N/A' }}</p>
+                    </div>
+                </div>
+            {% else %}
+                <form action="{{ path('validate_lesson', {id_lesson: lesson.idLesson}) }}" method="post">
+                    <div class="button">
+                        <button type="submit" class="btn mt-3">Valider la leçon</button>
+                    </div>
+                </form>
+            {% endif %}
         </div>
-      </div>
-      {% else %}
-       <form action="{{ path('validate_lesson', {id_lesson: lesson.idLesson})}}" method="post">
-          <div class="button">
-            <button type="submit " class="btn mt-3">Valider la leçon</button>
-          </div>
-       </form>
-      {% endif %}
-      
     </div>
-  </div>
 </div>
 {% endblock %}

@@ -1,4 +1,11 @@
+/* Style global pour les images */
 img {
-    background-color: #0074c7;
-    width: 45vw !important;
+    background-color: #0074c7; /* Bleu de fond pour mettre en valeur l'image */
+    max-width: 100%;           /* Empêche le débordement hors de son conteneur */
+    width: 45vw;               /* Largeur en fonction de la taille de la fenêtre */
+    height: auto;              /* Préserve le ratio hauteur/largeur */
+    display: block;            /* Évite les espaces blancs sous l'image */
+    object-fit: cover;         /* Couvre le conteneur si besoin sans déformer */
+    border-radius: 5px;        /* Coins légèrement arrondis pour un style doux */
+    margin: 0 auto;            /* Centre l'image si elle n'est pas en flex */
 }

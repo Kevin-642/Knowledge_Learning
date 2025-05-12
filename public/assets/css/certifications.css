@@ -1,34 +1,40 @@
+/* .certification-img : Style pour les images de certification (cercle) */
 .certification-img {
-    width: 75px;
-    border-radius: 50%;
+    width: 75px; /* Largeur de l'image */
+    border-radius: 50%; /* Bordure arrondie à 50% pour obtenir un cercle parfait */
 }
 
+/* .li-lesson : Style des éléments de liste pour les leçons */
 .li-lesson {
-    list-style-type: none;
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    gap: 2rem;
-    margin: 2rem;
+    list-style-type: none; /* Supprimer les puces par défaut des listes */
+    display: flex; /* Utilisation de Flexbox pour aligner les éléments horizontalement */
+    justify-content: start; /* Aligner les éléments au début (gauche) */
+    align-items: center; /* Centrer verticalement les éléments */
+    gap: 2rem; /* Espacement de 2rem entre les éléments */
+    margin: 2rem; /* Marge autour de l'élément de liste */
 }
 
+/* .ul-cursus : Style des listes de cursus avec ombre */
 .ul-cursus {
-    box-shadow: 2px 2px 15px #384050;
-    border-radius: 10px;
+    box-shadow: 2px 2px 15px #384050; /* Ombre portée (2px horizontal, 2px vertical, 15px de flou) avec une couleur grise */
+    border-radius: 10px; /* Coins arrondis de 10px */
 }
 
+/* .separation : Ligne de séparation verte, utilisée pour diviser les sections */
 .separation {
-    height: 2px;
-    background-color: #82b864;
-    margin: 10px auto;
-    width: 50vw;
+    height: 2px; /* Hauteur de la ligne de séparation */
+    background-color: #82b864; /* Couleur de fond : vert */
+    margin: 10px auto; /* Espacement vertical de 10px, centré horizontalement */
+    width: 50vw; /* Largeur de 50% de la largeur de la fenêtre */
 }
 
+/* .theme : Style pour le texte des thèmes */
 .theme {
-    font-size: 2rem;
+    font-size: 2rem; /* Taille de police de 2rem pour le thème */
 }
 
+/* .cursus : Style pour le texte des cursus */
 .cursus {
-    font-size: 1.5rem;
-    margin-left: 3rem !important;
+    font-size: 1.5rem; /* Taille de police de 1.5rem pour le cursus */
+    margin-left: 3rem !important; /* Marge à gauche de 3rem, avec l'importance pour garantir que ce style soit appliqué */
 }

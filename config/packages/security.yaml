@@ -1,54 +1,60 @@
 security:
-    # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
+    # Définition du hashage des mots de passe pour les utilisateurs
     password_hashers:
+        # Utilisation de la méthode automatique pour le hachage des mots de passe
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
-    # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
+
+    # Définition du fournisseur d'utilisateurs pour charger les utilisateurs à partir de la base de données
     providers:
-        # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:
             entity:
-                class: App\Entity\User
-                property: email
+                class: App\Entity\User        # Entité User pour récupérer les informations utilisateur
+                property: email                # Recherche des utilisateurs par l'email
+
     firewalls:
+        # Sécurité pour la section de développement (profiler, assets)
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
+            security: false               # Désactive la sécurité pour ces pages
+
+        # Configuration du firewall principal pour l'application
         main:
             lazy: true
-            provider: app_user_provider
-            custom_authenticator: App\Security\SecurityAuthenticator
+            provider: app_user_provider              # Utilise notre fournisseur d'utilisateurs défini ci-dessus
+            custom_authenticator: App\Security\SecurityAuthenticator  # Utilisation d'un authentificateur personnalisé
             logout:
-                path: app_logout
-                # where to redirect after logout
-                # target: app_any_route
+                path: app_logout               # Chemin pour la déconnexion
+                target: app_home               # Où rediriger après la déconnexion (ici la page d'accueil)
 
             remember_me:
-                secret: '%kernel.secret%'
-                lifetime: 604800
-                path: /
-                always_remember_me: true
+                secret: '%kernel.secret%'          # Secret pour la fonctionnalité "Se souvenir de moi"
+                lifetime: 604800                  # Durée de vie du cookie "remember me" (7 jours)
+                path: /                           # Définition du chemin pour lequel le cookie est valide
+                always_remember_me: true          # Toujours activer le "se souvenir de moi" même après la déconnexion
 
-            # activate different ways to authenticate
-            # https://symfony.com/doc/current/security.html#the-firewall
-
-            # https://symfony.com/doc/current/security/impersonating_user.html
-            # switch_user: true
-
-    # Easy way to control access for large sections of your site
-    # Note: Only the *first* access control that matches will be used
+    # Règles d'accès selon les rôles des utilisateurs
     access_control:
-         - { path: ^/admin, roles: ROLE_ADMIN }
-         - { path: ^/formation, roles: ROLE_USER }
+         # L'accès à toutes les pages /admin nécessite le rôle ROLE_ADMIN
+         - { path: ^/admin, roles: ROLE_ADMIN }   
+         # L'accès à toutes les pages /formation nécessite le rôle ROLE_USER
+         - { path: ^/formation, roles: ROLE_USER } 
+         # Forcer le HTTPS pour toutes les pages
+         - { path: ^/.* , requires_channel: https }
 
+# Configuration de la session dans framework.yaml
+framework:
+    session:
+        # Paramètres des cookies pour la gestion de session
+        cookie_secure: true                     # Les cookies de session ne seront envoyés que sur une connexion HTTPS
+        cookie_httponly: true                   # Empêche l'accès aux cookies par JavaScript pour plus de sécurité
+        cookie_samesite: 'strict'               # Empêche les attaques CSRF en restreignant les cookies aux contextes sécurisés
+
+# Configuration spéciale pour les tests
 when@test:
     security:
         password_hashers:
-            # By default, password hashers are resource intensive and take time. This is
-            # important to generate secure password hashes. In tests however, secure hashes
-            # are not important, waste resources and increase test times. The following
-            # reduces the work factor to the lowest possible values.
             Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
                 algorithm: auto
-                cost: 4 # Lowest possible value for bcrypt
-                time_cost: 3 # Lowest possible value for argon
-                memory_cost: 10 # Lowest possible value for argon
+                cost: 4            # Réduction du coût pour bcrypt (plus rapide en test)
+                time_cost: 3       # Réduction du coût pour argon2 (plus rapide en test)
+                memory_cost: 10    # Réduction du coût pour argon2 (plus rapide en test)
