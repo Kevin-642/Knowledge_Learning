@@ -1,7 +1,17 @@
 framework:
     secret: '%env(APP_SECRET)%'
 
-    profiler: { only_exceptions: false }
+    # Configuration des proxies de confiance
+    trusted_proxies: '%env(TRUSTED_PROXIES)%'
+    trusted_headers: 
+        - 'x-forwarded-for'
+        - 'x-forwarded-host'
+        - 'x-forwarded-port'
+        - 'x-forwarded-proto'
+        - 'x-forwarded-prefix'
+
+    profiler: 
+        only_exceptions: false
 
     session: 
         handler_id: null
@@ -14,9 +24,6 @@ framework:
         save_path: '%kernel.project_dir%/var/sessions/%kernel.environment%'
         metadata_update_threshold: 0
         sid_bits_per_character: 4
-
-    #esi: true
-    #fragments: true
 
 when@test:
     framework:
