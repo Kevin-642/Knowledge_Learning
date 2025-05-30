@@ -3,15 +3,21 @@
 {% block title %}Paiement réussi{% endblock %}
 
 {% block body %}
-
 <div class="container my-2">
 
     <h1>Paiement réussi !</h1>
 
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
     <p>Merci pour votre achat. Vous pouvez maintenant accéder à vos leçons.</p>
 
-    <a href="{{ path('formation') }}" class="btn btn-primary" role="button">Accéder au cours</a>
+    <a href="{{ path('app_formation') }}" class="btn btn-primary" role="button">Accéder au cours</a>
 
 </div>
-
 {% endblock %}

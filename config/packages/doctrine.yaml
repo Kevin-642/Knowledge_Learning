@@ -1,10 +1,12 @@
 doctrine:
     dbal:
-        url: '%env(SCALINGO_MYSQL_URL)%'
+        logging: true
+        profiling: true
+        url: '%env(DATABASE_URL)%'
         charset: UTF8
-        options:
-            !php/const PDO::MYSQL_ATTR_SSL_CA: '%kernel.project_dir%/config/certs/scalingo-database.pem'
-            !php/const PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT: true
+        #options:
+            #!php/const PDO::MYSQL_ATTR_SSL_CA: '%kernel.project_dir%/config/certs/scalingo-database.pem'
+            #!php/const PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT: true
 
 
     orm:

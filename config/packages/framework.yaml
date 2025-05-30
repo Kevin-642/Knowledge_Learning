@@ -1,21 +1,20 @@
 framework:
     secret: '%env(APP_SECRET)%'
 
-    # Configuration des proxies de confiance
     trusted_proxies: '%env(TRUSTED_PROXIES)%'
-    trusted_headers: 
+    trusted_headers:
         - 'x-forwarded-for'
         - 'x-forwarded-host'
         - 'x-forwarded-port'
         - 'x-forwarded-proto'
         - 'x-forwarded-prefix'
 
-    profiler: 
+    profiler:
         only_exceptions: false
 
-    session: 
+    session:
         handler_id: null
-        cookie_secure: auto
+        cookie_secure: false             # ❗ Important : false en local
         cookie_samesite: lax
         cookie_lifetime: 0
         gc_probability: 1
